@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/constans/themedata.dart';
+import 'package:musicapp/ui/screens/layout_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,10 +11,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themedata,
+      home: const Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: LayoutScreen(),
         ),
       ),
     );

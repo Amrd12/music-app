@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:musicapp/ui/screens/home_screen/home_screen.dart';
+import '../../constans/strings.dart';
+
+enum NavigationItem {
+  search(homeRoute, Icons.home_outlined, Icons.home, HomeScreen()),
+  home(homeRoute, Icons.home_outlined, Icons.home, HomeScreen()),
+  collection(homeRoute, Icons.home_outlined, Icons.home, HomeScreen());
+
+  const NavigationItem(this.routeName, this.icon, this.selectedIcon, this.body);
+
+  final String routeName;
+  final IconData icon;
+  final IconData selectedIcon;
+  final Widget body;
+
+  BottomNavigationBarItem get bottomNavigationBarItem {
+    return BottomNavigationBarItem(
+      icon: Icon(icon),
+      activeIcon: Icon(selectedIcon),
+      label: routeName.replaceFirst("/", "").toUpperCase(),
+    );
+  }
+}
