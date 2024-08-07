@@ -2,22 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:musicapp/constans/colors.dart';
 
 final ThemeData themedata = ThemeData(
+  // useMaterial3: true,
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
-    primary: MyColors.myGrey,
+    primary: MyColors.myGreyHeavy,
     onPrimary: MyColors.myOrange,
-    secondary: MyColors.myBlack,
+    secondary: MyColors.myGreyLight,
     onSecondary: MyColors.myWhite,
     error: Colors.red,
     onError: Colors.white,
     surface: MyColors.myBlack,
     onSurface: MyColors.myWhite,
   ),
+
   primaryTextTheme: const TextTheme(
-    displayLarge: TextStyle(fontSize: 30, fontFamily: "NicoMogi"),
-    displayMedium: TextStyle(fontSize: 30, fontFamily: "LexendExa"),
+    bodyLarge: TextStyle(fontSize: 30, fontFamily: "NicoMogi"),
+    bodyMedium: TextStyle(fontSize: 30, fontFamily: "LexendExa"),
+    titleLarge: TextStyle(fontSize: 25, fontFamily: "NicoMogi"),
+    titleMedium: TextStyle(
+        fontSize: 20, fontFamily: "LexendExa", color: MyColors.myGreyLight),
+    labelLarge: TextStyle(fontSize: 10, fontFamily: "NicoMogi"),
+    labelMedium: TextStyle(fontSize: 10, fontFamily: "LexendExa"),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: MyColors.myGrey.withOpacity(.1),
+      backgroundColor: MyColors.myGreyHeavy.withOpacity(.1),
       selectedItemColor: MyColors.myOrange),
 );

@@ -18,10 +18,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-fonts:
+  fonts:
     - family: NicoMogi
       fonts:
-        - asset: assets\fonts\NicoMoji-Regular.ttf
+        - asset: assets/fonts/NicoMoji-Regular.ttf
     - family: LexendExa
       fonts:
-        - asset: assets\fonts\LexendExa-VariableFont_wght.ttf
+        - asset: assets/fonts/LexendExa-VariableFont_wght.ttf
