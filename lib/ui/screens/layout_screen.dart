@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musicapp/ui/screens/Navigation_Item.dart';
-
-import '../../constans/colors.dart';
+import 'package:musicapp/ui/screens/navigation_item.dart';
 
 class LayoutScreen extends StatefulWidget {
   const LayoutScreen({super.key});

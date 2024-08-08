@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/artist_widget.dart';
 
 import '../../../../constans/strings.dart';
@@ -14,8 +15,7 @@ class ArtistList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Artists For You",
-              style: Theme.of(context).primaryTextTheme.bodyMedium),
+          const Text("Artists For You", style: TextStyleManger.mainTextLexend),
           const SizedBox(height: 10),
           SizedBox(
             height: 130,
@@ -26,7 +26,8 @@ class ArtistList extends StatelessWidget {
                 final double pding = index != 5 ? 10 : 0;
                 return Padding(
                   padding: EdgeInsets.only(right: pding),
-                  child: ArtistWidget(name: "halsey", picLink: homePicUrl),
+                  child:
+                      const ArtistWidget(name: "halsey", picLink: homePicUrl),
                 );
               },
             ),

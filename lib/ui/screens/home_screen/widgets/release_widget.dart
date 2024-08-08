@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:musicapp/constans/colors.dart';
-import 'package:musicapp/constans/strings.dart';
-import 'package:musicapp/constans/themedata.dart';
+import 'package:musicapp/constans/text_style_manager.dart';
 
 class ReleaseWidget extends StatelessWidget {
   const ReleaseWidget(
@@ -15,6 +13,7 @@ class ReleaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 350,
+      // height: 200,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(30)),
@@ -28,7 +27,7 @@ class ReleaseWidget extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(right: 40),
+                      margin: const EdgeInsets.only(right: 40),
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
@@ -52,8 +51,8 @@ class ReleaseWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(songName, style: Theme.of(context).textTheme.titleLarge),
-                  Text(author, style: Theme.of(context).textTheme.titleMedium)
+                  Text(songName, style: TextStyleManger.secTextLexend),
+                  Text(author, style: TextStyleManger.secTextLexendgery)
                 ],
               )
             ],

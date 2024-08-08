@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:musicapp/constans/colors.dart';
+import 'package:musicapp/constans/text_style_manager.dart';
 
 class ArtistWidget extends StatelessWidget {
   const ArtistWidget({super.key, required this.name, required this.picLink});
@@ -19,7 +19,7 @@ class ArtistWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Image.network(picLink, fit: BoxFit.cover)),
         // SizedBox(height: 10),
-        Text(name, style: Theme.of(context).primaryTextTheme.titleMedium)
+        Text(name, style: TextStyleManger.secTextLexend)
       ],
     );
   }
