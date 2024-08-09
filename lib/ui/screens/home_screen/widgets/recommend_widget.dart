@@ -8,6 +8,8 @@ class RecommendWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
+
     return Stack(alignment: AlignmentDirectional.bottomEnd, children: [
       Container(
         margin: const EdgeInsets.only(bottom: 25, right: 25),
@@ -16,9 +18,9 @@ class RecommendWidget extends StatelessWidget {
             // color: MyColors.myOrange,
             image: const DecorationImage(image: NetworkImage(recPicUrl)),
             borderRadius: BorderRadius.circular(35)),
-        child: const Text(
+        child: Text(
           "Daily Mix",
-          style: TextStyleManger.secTextLexend,
+          style: textStyleManger.secTextLexend,
         ),
       ),
       IconButton(

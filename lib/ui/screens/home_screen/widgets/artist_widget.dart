@@ -7,6 +7,7 @@ class ArtistWidget extends StatelessWidget {
   final String name, picLink;
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -19,7 +20,7 @@ class ArtistWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Image.network(picLink, fit: BoxFit.cover)),
         // SizedBox(height: 10),
-        Text(name, style: TextStyleManger.secTextLexend)
+        Text(name, style: textStyleManger.secTextLexend)
       ],
     );
   }

@@ -8,13 +8,15 @@ class RecommedList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
+
     return SizedBox(
       height: 250,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Recommended\nFor You Today",
-              style: TextStyleManger.mainTextLexend),
+          Text("Recommended\nFor You Today",
+              style: textStyleManger.mainTextLexend),
           SizedBox(
             height: 150,
             child: ListView.builder(

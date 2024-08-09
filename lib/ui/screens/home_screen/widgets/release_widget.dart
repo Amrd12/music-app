@@ -11,6 +11,8 @@ class ReleaseWidget extends StatelessWidget {
   final String songName, author, picLink;
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
+
     return Container(
       width: 350,
       // height: 200,
@@ -51,8 +53,8 @@ class ReleaseWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(songName, style: TextStyleManger.secTextLexend),
-                  Text(author, style: TextStyleManger.secTextLexendgery)
+                  Text(songName, style: textStyleManger.secTextLexend),
+                  Text(author, style: textStyleManger.secTextLexendGrey)
                 ],
               )
             ],

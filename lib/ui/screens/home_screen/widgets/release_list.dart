@@ -9,10 +9,12 @@ class ReleaseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("New Releases", style: TextStyleManger.mainTextLexend),
+        Text("New Releases", style: textStyleManger.mainTextLexend),
         SizedBox(
           height: 150,
           child: ListView.builder(
@@ -26,7 +28,6 @@ class ReleaseList extends StatelessWidget {
                     songName: "In The Moring",
                     author: "Riell",
                     picLink: homePicUrl),
-                    
               );
             },
           ),

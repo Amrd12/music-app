@@ -9,17 +9,16 @@ class HomeBodyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Hello Amilly !",
-            style: TextStyleManger.mainTextNico,
-          ),
-          CircleAvatar(
-            radius: 25,
-            foregroundImage: NetworkImage(homePicUrl),
-          )
-        ]);
+    final textStyleManger = TextStyleManger(context);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(
+        "Hello Amilly !",
+        style: textStyleManger.mainTextNico,
+      ),
+      const CircleAvatar(
+        radius: 25,
+        foregroundImage: NetworkImage(homePicUrl),
+      )
+    ]);
   }
 }

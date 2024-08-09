@@ -10,12 +10,14 @@ class ArtistList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyleManger = TextStyleManger(context);
+
     return SizedBox(
       height: 200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Artists For You", style: TextStyleManger.mainTextLexend),
+          Text("Artists For You", style: textStyleManger.mainTextLexend),
           const SizedBox(height: 10),
           SizedBox(
             height: 130,

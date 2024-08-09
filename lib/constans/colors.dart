@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyColors {
+  MyColors(BuildContext context);
+
   static const Color myBlack = Color.fromARGB(255, 0, 0, 0); // Dark grey/black
   static const Color myOrange = Color(0xFFE35C63); // Red/Orange
   static const Color myGreyHeavy = Color(0xff191919);
