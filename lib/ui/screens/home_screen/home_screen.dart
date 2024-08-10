@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:musicapp/constans/colors.dart';
-import 'package:musicapp/constans/strings.dart';
-import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/artist_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/recommed_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/release_list.dart';
