@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:musicapp/ui/screens/home_screen/widgets/release_widget.dart';
+import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/ui/screens/home_screen/widgets/music_widget.dart';
 
 import '../../../../constans/strings.dart';
 import '../../../../constans/text_style_manager.dart';
 
-class ReleaseList extends StatelessWidget {
-  const ReleaseList({super.key});
-
+class MusicWidgetList extends StatelessWidget {
+  MusicWidgetList({super.key, required this.ModelList});
+  List<MusicModel> ModelList;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,17 +17,14 @@ class ReleaseList extends StatelessWidget {
         SizedBox(
           height: 150,
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: ModelList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              final double pding = index != 5 ? 10 : 0;
+              final double pding = index != ModelList.length ? 10 : 0;
+              MusicModel item = ModelList[index];
               return Padding(
                 padding: EdgeInsets.only(right: pding),
-                child: const ReleaseWidget(
-                    songName: "In The Moring",
-                    author: "Riell",
-                    picLink: homePicUrl),
-                    
+                child: MusicWidget(model: item),
               );
             },
           ),

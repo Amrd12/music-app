@@ -1,0 +1,19 @@
+class ApiConstantsRequest {
+  static const String baseUrl = "https://youtube-music-api3.p.rapidapi.com/";
+  static const String home = "v2/home";
+  static const String musicInfo = "info";
+  static const String lyricsSynced = "music/lyrics/synced";
+  static const String lyricsPlain = "music/lyrics/plain";
+  // static const String wheel = "wheel.php";
+  // static const String register = "register.php";
+  // static const String messagesAdvice = "messages_advice.php";
+}
+
+class ApiConstantsResponse {
+  static const String quickhomeVidoes = "quick_picks";
+  static const String quickhomePlaylists = "music_this_year";
+  static const String quickhomealbums = "new_release_albums";
+  static const String charts = "charts";
+  static const String chartsVideos = "top_music_video";
+  static const String chartsArtist = "top_artist";
+}

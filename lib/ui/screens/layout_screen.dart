@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicapp/ui/screens/navigation_item.dart';
+import 'package:musicapp/ui/screens/player_mini/player_mini_screen.dart';
 
 class LayoutScreen extends StatefulWidget {
   const LayoutScreen({super.key});
@@ -19,7 +20,12 @@ class _LayoutScreenState extends State<LayoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: index, children: screen),
+      body: Column(
+        children: [
+          Flexible(child: IndexedStack(index: index, children: screen)),
+          PlayerMiniScreen()
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           enableFeedback: false,

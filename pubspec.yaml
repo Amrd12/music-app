@@ -13,11 +13,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_dotenv: ^5.1.0
+  get_it: ^7.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   media_kit: ^1.1.10
   media_kit_libs_audio: ^1.0.4
-
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
@@ -33,3 +34,5 @@ flutter:
     - family: LexendExa
       fonts:
         - asset: assets/fonts/LexendExa-VariableFont_wght.ttf
+  assets:
+    - data.env

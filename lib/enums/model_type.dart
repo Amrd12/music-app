@@ -41,10 +41,3 @@ extension ToModelType on String {
   }
 }
 
-void main(List<String> args) {
-  // Example usage:
-  String modelString = "video";
-  ModelType? modelType = modelString.toModelType();
-  print(modelType); // Output: ModelType.video
-  print(modelType.toString()); // Output: video
-}
