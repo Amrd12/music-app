@@ -1,12 +1,10 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:musicapp/constans/api_constants.dart';
 import 'package:musicapp/constans/themedata.dart';
-import 'package:musicapp/data/api/api_service.dart';
-import 'package:musicapp/data/api/music_api_service.dart';
-import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:musicapp/ui/screens/layout_screen.dart';
 import 'package:musicapp/ui/screens/player_mini/cubit/player_mini_cubit.dart';
@@ -14,22 +12,20 @@ import 'package:musicapp/ui/screens/player_mini/cubit/player_mini_cubit.dart';
 void main() async {
   await dotenv.load(fileName: "data.env");
   setup();
-//   final c = await ApiService().apiHomePage();
-//   // print(c);
+  AudioPlayerHandler _audioHandler = locator.get<AudioPlayerHandler>();
 
-// // Assuming c["results"][ApiConstantsResponse.quickhomeVidoes] is a List
-//   List<Map<String, dynamic>> x = List<Map<String, dynamic>>.from(
-//       c["results"][ApiConstantsResponse.quickhomeVidoes]);
+  _audioHandler = await AudioService.init(
+    builder: () => AudioPlayerHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.example.musicapp.channel.audio',
+      androidNotificationChannelName: 'Music playback',
+    ),
+  );
 
-//   // print(x.runtimeType);
-
-//   final m = MusicRepo().parseMusicModel(x);
-//   // print(m);
-//   final v = await MusicRepo().getMusicData(m[3]);
-//   final ll = await MusicApiService().getMusicMapLyrics("Tk7WFyHUr1E");
-//   print(ll);
   runApp(const MainApp());
 }
+
+class MyAudioHandler {}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
