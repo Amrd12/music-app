@@ -20,4 +20,6 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     print("model isdetailed::? ${model.isDetailed}");
     emit(PlayerMiniLoad(model, true));
   }
+
+  void setCuruntValue(double sec) => emit(PlayerMiniSecounds(sec));
 }

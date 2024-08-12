@@ -18,8 +18,11 @@ class PlayerMiniScreen extends StatelessWidget {
           print(model!.title);
           visible = state.visible;
           print(visible);
+          print("model Tsec ${model!.seceunds}");
         }
-
+        if (state is PlayerMiniSecounds && model != null) {
+          model!.startFrom = state.sec;
+        }
         return visible
             ? Container(
                 decoration: const BoxDecoration(
@@ -46,18 +49,24 @@ class PlayerMiniScreen extends StatelessWidget {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          Text(model!.startFrom.toString()),
+                          Text(Duration(seconds: model!.startFrom!.round())
+                              .toString()
+                              .split('.')[0]),
                           Expanded(
                             child: Slider(
                               value: model!.startFrom,
-                              min: (model!.startFrom),
+                              min: 0,
                               max: (model!.seceunds ?? 0),
-                              onChanged: (_) {},
-                              activeColor: MyColors.myGreyLight,
+                              onChanged: (sec) =>
+                                  BlocProvider.of<PlayerMiniCubit>(context)
+                                      .setCuruntValue(sec),
+                              activeColor: MyColors.myOrange,
                               secondaryActiveColor: MyColors.myOrange,
                             ),
                           ),
-                          Text(model!.seceunds.toString())
+                          Text(Duration(seconds: model!.seceunds!.round())
+                              .toString()
+                              .split('.')[0])
                         ],
                       )
                     ],

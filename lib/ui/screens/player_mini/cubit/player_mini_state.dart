@@ -13,6 +13,11 @@ final class PlayerMiniLoad extends PlayerMiniState {
 
 final class PlayerMiniGetFormates extends PlayerMiniState {}
 
+final class PlayerMiniSecounds extends PlayerMiniState {
+  double sec;
+  PlayerMiniSecounds(this.sec);
+}
+
 final class PlayerMiniAddToBox extends PlayerMiniState {}
 
 final class PlayerMiniStart extends PlayerMiniState {}

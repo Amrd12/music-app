@@ -29,7 +29,7 @@ class MusicModel extends HiveObject {
   double startFrom = 0;
 
   @HiveField(7)
-  final double? seceunds;
+  double? seceunds;
 
   List<Map<String, String>>? formates;
 

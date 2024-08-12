@@ -23,7 +23,7 @@ class ApiService {
       {Map<String, dynamic>? queryParameters}) async {
     try {
       Response res = await dio.get(url, queryParameters: queryParameters);
-      debugPrint("Status Code : res.statusCode.toString()");
+      debugPrint("Status Code : ${res.statusCode.toString()}");
       if (res.data.runtimeType == String) {
         debugPrint("String Found");
         return res.data == "" ? {"error": "empty"} : jsonDecode(res.data);

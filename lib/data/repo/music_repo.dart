@@ -21,6 +21,7 @@ class MusicRepo {
           .map((i) => i["url"].toString()));
       sec = double.tryParse(data["videoDetails"]["lengthSeconds"].toString())!;
       debugPrint("Music total Sec : $sec");
+      model.seceunds = sec;
       model.isDetailed = true;
       if (model.isInBox) model.save();
     }
