@@ -26,10 +26,10 @@ class MusicModel extends HiveObject {
   final String? channelId;
 
   @HiveField(6)
-  int startFrom = 0;
+  double startFrom = 0;
 
   @HiveField(7)
-  final int? seceunds;
+  final double? seceunds;
 
   List<Map<String, String>>? formates;
 
@@ -66,7 +66,7 @@ class MusicModel extends HiveObject {
       author: map['author'] as String,
       thumbnail: List<String>.from((map['thumbnail'] as List<String>)),
       channelId: map['channelId'] != null ? map['channelId'] as String : null,
-      seceunds: map['seceunds'] != null ? map['seceunds'] as int : null,
+      seceunds: map['seceunds'] != null ? map['seceunds'] as double : null,
     );
   }
 
@@ -81,8 +81,8 @@ class MusicModel extends HiveObject {
       String? author,
       List<String>? thumbnail,
       String? channelId,
-      int? startFrom,
-      int? seceunds,
+      double? startFrom,
+      double? seceunds,
       bool? isDetailed,
       List<Map<String, String>>? formates}) {
     return MusicModel(

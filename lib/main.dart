@@ -9,6 +9,7 @@ import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:musicapp/ui/screens/layout_screen.dart';
+import 'package:musicapp/ui/screens/player_mini/cubit/player_mini_cubit.dart';
 
 void main() async {
   await dotenv.load(fileName: "data.env");
@@ -39,6 +40,9 @@ class MainApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => HomeScreenCubit(),
+          ),
+          BlocProvider(
+            create: (context) => PlayerMiniCubit(),
           ),
         ],
         child: MaterialApp(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';

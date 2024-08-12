@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/music_widget.dart';
 
-import '../../../../constans/strings.dart';
 import '../../../../constans/text_style_manager.dart';
 
 class MusicWidgetList extends StatelessWidget {

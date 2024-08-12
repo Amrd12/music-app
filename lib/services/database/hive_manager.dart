@@ -14,4 +14,7 @@ abstract class HiveManager<T> {
     final box = Hive.box<T>(boxName);
     return box.values.contains(m);
   }
+
+  List<T> getAllSaved() => Hive.box<T>(boxName).values.toList();
+  
 }

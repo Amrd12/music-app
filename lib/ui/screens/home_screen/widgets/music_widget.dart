@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/ui/screens/player_mini/cubit/player_mini_cubit.dart';
 
 class MusicWidget extends StatelessWidget {
   const MusicWidget({super.key, required this.model});
@@ -31,7 +33,9 @@ class MusicWidget extends StatelessWidget {
                   child: CachedNetworkImage(
                       imageUrl: model.thumbnail.first, fit: BoxFit.cover)),
               IconButton(
-                onPressed: () {},
+                onPressed: () async =>
+                    await BlocProvider.of<PlayerMiniCubit>(context)
+                        .loadAudio(model),
                 icon: CircleAvatar(
                     backgroundColor:
                         Theme.of(context).colorScheme.secondary.withOpacity(.7),

@@ -21,7 +21,7 @@ class RecommedList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 5,
               itemBuilder: (context, index) {
-                return RecommendWidget();
+                return const RecommendWidget();
               },
             ),
           )

@@ -23,16 +23,14 @@ class ApiService {
       {Map<String, dynamic>? queryParameters}) async {
     try {
       Response res = await dio.get(url, queryParameters: queryParameters);
-      debugPrint(res.statusCode.toString());
-      // debugPrint(res.data.toString());
-      debugPrint(res.data.runtimeType.toString());
+      debugPrint("Status Code : res.statusCode.toString()");
       if (res.data.runtimeType == String) {
-        print("String Found");
+        debugPrint("String Found");
         return res.data == "" ? {"error": "empty"} : jsonDecode(res.data);
       }
       return res.data;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("api error : :  ${e.toString()}");
       return {"error": e.toString()};
     }
   }

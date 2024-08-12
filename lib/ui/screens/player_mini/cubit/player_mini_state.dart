@@ -7,12 +7,8 @@ final class PlayerMiniInitial extends PlayerMiniState {}
 
 final class PlayerMiniLoad extends PlayerMiniState {
   MusicModel model;
-  PlayerMiniLoad(this.model);
-}
-
-final class PlayerMinivisible extends PlayerMiniState {
   bool visible;
-  PlayerMinivisible(this.visible);
+  PlayerMiniLoad(this.model, this.visible);
 }
 
 final class PlayerMiniGetFormates extends PlayerMiniState {}
