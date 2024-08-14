@@ -4,7 +4,8 @@ class ApiConstantsRequest {
   static const String musicInfo = "info";
   static const String lyricsSynced = "music/lyrics/synced";
   static const String lyricsPlain = "music/lyrics/plain";
-  // static const String wheel = "wheel.php";
+
+  static const String next = "next";
   // static const String register = "register.php";
   // static const String messagesAdvice = "messages_advice.php";
 }

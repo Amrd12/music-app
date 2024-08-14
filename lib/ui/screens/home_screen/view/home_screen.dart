@@ -6,7 +6,7 @@ import 'package:musicapp/ui/screens/home_screen/widgets/artist_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/recommed_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/music_widget_list.dart';
 
-import 'widgets/home_body_app_bar.dart';
+import '../widgets/home_body_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -27,6 +27,8 @@ class ApiService {
       if (res.data.runtimeType == String) {
         debugPrint("String Found");
         return res.data == "" ? {"error": "empty"} : jsonDecode(res.data);
+      } else if (res.data.runtimeType == List) {
+        return {"results": res.data};
       }
       return res.data;
     } catch (e) {

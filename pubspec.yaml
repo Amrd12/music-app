@@ -20,6 +20,7 @@ dependencies:
   audio_service: ^0.18.15
   just_audio: ^0.9.37
   permission_handler: ^11.3.1
+  audio_video_progress_bar: ^2.0.3
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:

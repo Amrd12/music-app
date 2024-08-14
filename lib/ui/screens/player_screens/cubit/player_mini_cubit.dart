@@ -13,30 +13,44 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
   final _audioHandler = locator.get<AudioPlayerHandler>();
 
   MusicRepo musicRepo = locator.get<MusicRepo>();
+  MusicModel? currentMusic;
+
+  List<MusicModel> playList = [];
 
   Future<void> loadAudio(MusicModel model) async {
-    //TODO Handel Premisions
     if (!model.isDetailed ||
         model.formates == null ||
         model.formates!.isEmpty) {
       model = await musicRepo.getMusicData(model);
     }
-    if (await Permission.audio.isDenied ||
-        await Permission.audio.isPermanentlyDenied) {
-      final state = await Permission.audio.request();
-      if (!state.isGranted) {
-        print("no access");
-      } else {
-        print(" access");
-      }
-    }
+
     print("model isdetailed::? ${model.isDetailed}");
-    _audioHandler.setPlaying(model); // Start playing the audio
+    currentMusic = model;
+    playList = [model, ...await musicRepo.getNextMusic(model.id)];
+
+    await _audioHandler.initSongs(
+        musicModelSongs: playList); // Start playing the audio
     _audioHandler.play(); // Play the audio
     emit(PlayerMiniLoad(model, true));
   }
 
   void setCuruntValue(double sec) {
     emit(PlayerMiniSecounds(sec));
+  }
+
+  Future<void> playNext() async {
+    _audioHandler.skipToNext();
+    MusicModel model =
+        playList[playList.indexWhere((e) => e.id == currentMusic!.id) + 1];
+    currentMusic = await musicRepo.getMusicData(model);
+    emit(PlayerMiniLoad(currentMusic!, true));
+  }
+
+  void playPrev() {
+    int index = playList.indexWhere((e) => e.id == currentMusic!.id) - 1;
+    if (index > 0) return;
+    currentMusic = playList[index];
+    emit(PlayerMiniLoad(currentMusic!, true));
+    _audioHandler.skipToPrevious();
   }
 }

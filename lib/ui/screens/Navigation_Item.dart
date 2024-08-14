@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musicapp/ui/screens/home_screen/home_screen.dart';
+import 'package:musicapp/ui/screens/home_screen/view/home_screen.dart';
 import '../../constans/strings.dart';
 
 enum NavigationItem {

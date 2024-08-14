@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicapp/ui/screens/navigation_item.dart';
-import 'package:musicapp/ui/screens/player_mini/player_mini_screen.dart';
+import 'package:musicapp/ui/screens/player_screens/view/player_mini_screen.dart';
 
 class LayoutScreen extends StatefulWidget {
   const LayoutScreen({super.key});

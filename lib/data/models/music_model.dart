@@ -17,7 +17,7 @@ class MusicModel extends HiveObject {
   final String author;
 
   @HiveField(3)
-  final List<String> thumbnail;
+  List<String> thumbnail;
 
   @HiveField(4)
   bool isDetailed = false;

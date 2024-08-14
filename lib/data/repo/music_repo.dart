@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/constans/api_constants.dart';
 import 'package:musicapp/data/api/music_api_service.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/locator.dart';
@@ -11,12 +12,9 @@ class MusicRepo {
 
   Future<MusicModel> getMusicData(MusicModel model) async {
     final data = await _musicApiService.getMusicMapData(model.id);
-    String? channelId;
-    List<String>? thumbnails;
     double? sec;
     if (!model.isDetailed) {
-      channelId = data["videoDetails"]["channelId"];
-      thumbnails = List<String>.from(data["videoDetails"]["thumbnail"]
+      model.thumbnail = List<String>.from(data["videoDetails"]["thumbnail"]
               ["thumbnails"]
           .map((i) => i["url"].toString()));
       sec = double.tryParse(data["videoDetails"]["lengthSeconds"].toString())!;
@@ -36,4 +34,11 @@ class MusicRepo {
     }
     return model;
   }
+
+  Future<List<MusicModel>> getNextMusic(String id) async => _musicApiService
+          .getResponseJson(ApiConstantsRequest.next, queryParameters: {
+        "id": id
+      }).then((e) =>
+              parseMusicModel(List<Map<String, dynamic>>.from(e["results"]))
+                  .toList());
 }
