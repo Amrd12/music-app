@@ -4,6 +4,7 @@ import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
+import 'package:musicapp/services/primisions/request_song_permission.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'player_mini_state.dart';
@@ -18,6 +19,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
   List<MusicModel> playList = [];
 
   Future<void> loadAudio(MusicModel model) async {
+    await requestSongPermission();
     if (!model.isDetailed ||
         model.formates == null ||
         model.formates!.isEmpty) {
@@ -37,6 +39,9 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
   void setCuruntValue(double sec) {
     emit(PlayerMiniSecounds(sec));
   }
+
+  void visible(bool e) =>
+      currentMusic != null ? emit(PlayerMiniLoad(currentMusic!, e)) : null;
 
   Future<void> playNext() async {
     _audioHandler.skipToNext();

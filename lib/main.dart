@@ -6,8 +6,9 @@ import 'package:musicapp/constans/themedata.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
-import 'package:musicapp/ui/screens/layout_screen.dart';
+import 'package:musicapp/ui/screens/layout_screen/view/layout_screen.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   await dotenv.load(fileName: "data.env");
@@ -21,7 +22,10 @@ void main() async {
       androidNotificationChannelName: 'Music playback',
     ),
   );
-
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [SystemUiOverlay.bottom],
+  );
   runApp(const MainApp());
 }
 

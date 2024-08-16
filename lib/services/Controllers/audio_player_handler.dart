@@ -71,12 +71,6 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
   Future<void> stop() => audioPlayer.stop();
 
   @override
-  Future<void> skipToQueueItem(int index) async {
-    await audioPlayer.seek(Duration.zero, index: index);
-    play();
-  }
-
-  @override
   Future<void> skipToNext() async {
     if (currentIndex < queue.value.length) {
       currentIndex++;
@@ -118,8 +112,8 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
       currentIndex--;
       MusicModel model = playList[currentIndex];
 
-      if (!model.isDetailed ||
-          model.formates == null ||
+      if (model.isDetailed ||
+          model.formates != null ||
           model.formates!.isEmpty) {
         try {
           model = await musicRepo.getMusicData(model);

@@ -5,12 +5,13 @@ import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
-import '../widgets/player_widget.dart';
+import '../../widgets/player_widget.dart';
 
 class PlayerMiniScreen extends StatelessWidget {
-  PlayerMiniScreen({super.key});
+  PlayerMiniScreen({super.key, this.visible = false});
   MusicModel? model;
-  bool visible = false;
+  bool visible;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
@@ -19,15 +20,10 @@ class PlayerMiniScreen extends StatelessWidget {
           model = state.model;
           print(model!.title);
           visible = state.visible;
-          print(visible);
-          print("model Tsec ${model!.seceunds}");
         }
-        if (state is PlayerMiniSecounds && model != null) {
-          model!.startFrom = state.sec;
-        }
-        return visible
+        return (visible && model != null)
             ? player_widget(model: model as MusicModel)
-            : SizedBox.shrink();
+            : const SizedBox.shrink();
       },
     );
   }

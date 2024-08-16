@@ -10,6 +10,8 @@ class TextStyleManger {
       TextStyle(fontSize: 20, fontFamily: "NicoMogi");
   static const TextStyle secTextLexend =
       TextStyle(fontSize: 20, fontFamily: "LexendExa");
+  static const TextStyle secTextLexendWhite =
+      TextStyle(fontSize: 20, fontFamily: "LexendExa", color: MyColors.myWhite);
   static const TextStyle secTextLexendgery = TextStyle(
       fontSize: 20, fontFamily: "LexendExa", color: MyColors.myGreyLight);
 }

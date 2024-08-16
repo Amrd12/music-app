@@ -14,7 +14,7 @@ class MusicWidget extends StatelessWidget {
     return Container(
       width: 350,
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: MyColors.myGreyLight.withOpacity(.4),
           borderRadius: BorderRadius.circular(30)),
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
       child: Row(

@@ -26,19 +26,50 @@ class PlayPauseButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
+          onPressed: () => BlocProvider.of<PlayerMiniCubit>(context).playPrev(),
+          icon: const Icon(
+            Icons.fast_rewind,
+            size: 40,
+          ),
+        ),
+        SizedBox(width: 25),
+        _playingWidget(),
+        SizedBox(width: 25),
+        IconButton(
             onPressed: () =>
-                BlocProvider.of<PlayerMiniCubit>(context).playPrev(),
-            icon: Icon(Icons.arrow_back)),
-        StreamBuilder<PlaybackState>(
-          stream: songHandler.playbackState.stream,
-          builder: (context, snapshot) {
-            // Check if there's data in the snapshot
-            if (snapshot.hasData) {
-              // Retrive the playing status from the playback state
-              bool playing = snapshot.data!.playing;
+                BlocProvider.of<PlayerMiniCubit>(context).playNext(),
+            icon: const Icon(
+              Icons.fast_forward,
+              size: 40,
+            ))
+      ],
+    );
+  }
 
-              // Return an IconButton that toggles play/pause on press
-              return IconButton(
+  StreamBuilder<PlaybackState> _playingWidget() {
+    return StreamBuilder<PlaybackState>(
+      stream: songHandler.playbackState.stream,
+      builder: (context, snapshot) {
+        // Check if there's data in the snapshot
+        if (snapshot.hasData) {
+          // Retrive the playing status from the playback state
+          bool playing = snapshot.data!.playing;
+
+          // Return an IconButton that toggles play/pause on press
+          return Container(
+            width: 40.0, // Adjust the size of the circle
+            height: 40.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white, // Set the border color
+                width: 3.0, // Set the border width
+              ),
+            ),
+            child: Center(
+              child: IconButton(
+                padding: EdgeInsets.zero, // Remove default padding
+                constraints: BoxConstraints(), // Remove default constraints
                 onPressed: () {
                   // Toggle play/pause based on the current playing status
                   if (playing) {
@@ -51,18 +82,14 @@ class PlayPauseButton extends StatelessWidget {
                 icon: playing
                     ? Icon(Icons.pause_rounded, size: size)
                     : Icon(Icons.play_arrow_rounded, size: size),
-              );
-            } else {
-              // If there's no data in the snapshot, return an empty SizedBox
-              return const SizedBox.shrink();
-            }
-          },
-        ),
-        IconButton(
-            onPressed: () =>
-                BlocProvider.of<PlayerMiniCubit>(context).playNext(),
-            icon: Icon(Icons.arrow_forward))
-      ],
+              ),
+            ),
+          );
+        } else {
+          // If there's no data in the snapshot, return an empty SizedBox
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
