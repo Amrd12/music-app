@@ -46,7 +46,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     _audioHandler.skipToNext();
     MusicModel model =
         playList[playList.indexWhere((e) => e.id == currentMusic!.id) + 1];
-        
+
     currentMusic = await musicRepo.getMusicData(model);
 
     emit(PlayerMiniLoad(currentMusic!, true));
@@ -54,7 +54,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
 
   void playPrev() {
     int index = playList.indexWhere((e) => e.id == currentMusic!.id) - 1;
-    if (index > 0) return;
+    if (index < 0) return;
     currentMusic = playList[index];
     emit(PlayerMiniLoad(currentMusic!, true));
     _audioHandler.skipToPrevious();

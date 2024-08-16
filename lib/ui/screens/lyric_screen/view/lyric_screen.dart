@@ -6,6 +6,8 @@ import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/lyric_screen/cubit/lyric_cubit.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
+import '../Widgets/plain_lyric_widget.dart';
+
 class LyricScreen extends StatefulWidget {
   const LyricScreen({super.key});
   @override
@@ -16,7 +18,6 @@ class _LyricScreenState extends State<LyricScreen> {
   late MusicModel model;
   @override
   void initState() {
-    print("=========================================================");
     // BlocProvider.of<LyricCubit>(context).getLyric(widget.);
     super.initState();
   }
@@ -28,8 +29,7 @@ class _LyricScreenState extends State<LyricScreen> {
         if (state is PlayerMiniLoad) {
           model = state.model;
           if (model.lyrics == null) {
-            print(
-                "lyrics =============================================================");
+
             BlocProvider.of<LyricCubit>(context).getLyric(model.id);
           }
         }
@@ -42,13 +42,7 @@ class _LyricScreenState extends State<LyricScreen> {
             }
 
             if (model.lyrics!.isPlain) {
-              return Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    model.lyrics!.plainText!,
-                    style: TextStyleManger.mainTextLexend,
-                  ));
+              return PlainLyricWidget(model: model);
             }
             return Container();
           },
