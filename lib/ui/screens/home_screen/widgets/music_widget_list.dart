@@ -5,8 +5,8 @@ import 'package:musicapp/ui/screens/home_screen/widgets/music_widget.dart';
 import '../../../../constans/text_style_manager.dart';
 
 class MusicWidgetList extends StatelessWidget {
-  MusicWidgetList({super.key, required this.ModelList});
-  List<MusicModel> ModelList;
+  MusicWidgetList({super.key, required this.modelList});
+  List<MusicModel> modelList;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,11 +16,11 @@ class MusicWidgetList extends StatelessWidget {
         SizedBox(
           height: 150,
           child: ListView.builder(
-            itemCount: ModelList.length,
+            itemCount: modelList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              final double pding = index != ModelList.length ? 10 : 0;
-              MusicModel item = ModelList[index];
+              final double pding = index != modelList.length ? 10 : 0;
+              MusicModel item = modelList[index];
               return Padding(
                 padding: EdgeInsets.only(right: pding),
                 child: MusicWidget(model: item),

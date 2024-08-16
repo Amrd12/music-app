@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
+import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/ui/screens/lyric_screen/cubit/lyric_cubit.dart';
+import 'package:musicapp/ui/screens/lyric_screen/view/lyric_screen.dart';
+import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
 class MusicBottomSheet extends StatelessWidget {
-  const MusicBottomSheet({super.key, required this.scrollController});
+  MusicBottomSheet({super.key, required this.scrollController});
+
+  late MusicModel model;
+
   final DraggableScrollableController scrollController;
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -24,24 +33,37 @@ class MusicBottomSheet extends StatelessWidget {
               topRight: Radius.circular(50),
             ),
           ),
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0.0, backgroundColor: Colors.transparent),
-                  onPressed: () {},
-                  child: Text(
-                    "Lyrics",
-                    style: TextStyleManger.secTextLexendWhite,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0.0, backgroundColor: Colors.transparent),
+                    onPressed: () {},
+                    child: Text(
+                      "Playlist",
+                      style: TextStyleManger.secTextLexendWhite,
+                    ),
                   ),
-                ),
-                const Icon(Icons.arrow_upward),
-                // Add more content here if needed
-              ],
-            ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0.0, backgroundColor: Colors.transparent),
+                    onPressed: () {},
+                    child: Text(
+                      "Lyrics",
+                      style: TextStyleManger.secTextLexendWhite,
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                    controller: scrollController, child: LyricScreen()),
+              )
+            ],
           ),
         );
       },

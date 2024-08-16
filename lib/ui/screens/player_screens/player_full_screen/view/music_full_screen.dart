@@ -76,9 +76,7 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
                     IconButton(
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(Icons.arrow_back_ios_new, size: 40)),
-                    MusicBottomSheet(
-                      scrollController: scrollController,
-                    ),
+                    MusicBottomSheet(scrollController: scrollController),
                   ],
                 ),
               );
@@ -88,9 +86,7 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
 
   void changeSize() {
     setState(() {
-      // if (scrollController.size > .7) scrollController.jumpTo(.8);
       height = scrollController.size;
-      print(height);
     });
   }
 }

@@ -37,12 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const HomeBodyAppBar(),
                     const ArtistList(),
-                    MusicWidgetList(ModelList: modelList),
+                    MusicWidgetList(modelList: modelList),
                     const RecommedList()
                   ],
                 );
               } else {
-                return const CircularProgressIndicator();
+                return Container(
+                    child: Center(child: const CircularProgressIndicator()));
               }
             },
           ),

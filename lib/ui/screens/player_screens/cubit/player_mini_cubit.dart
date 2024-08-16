@@ -5,7 +5,6 @@ import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/services/primisions/request_song_permission.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 part 'player_mini_state.dart';
 
@@ -47,7 +46,9 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     _audioHandler.skipToNext();
     MusicModel model =
         playList[playList.indexWhere((e) => e.id == currentMusic!.id) + 1];
+        
     currentMusic = await musicRepo.getMusicData(model);
+
     emit(PlayerMiniLoad(currentMusic!, true));
   }
 

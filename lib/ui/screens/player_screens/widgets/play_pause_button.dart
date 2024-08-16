@@ -32,9 +32,9 @@ class PlayPauseButton extends StatelessWidget {
             size: 40,
           ),
         ),
-        SizedBox(width: 25),
+        const SizedBox(width: 25),
         _playingWidget(),
-        SizedBox(width: 25),
+        const SizedBox(width: 25),
         IconButton(
             onPressed: () =>
                 BlocProvider.of<PlayerMiniCubit>(context).playNext(),
@@ -69,7 +69,8 @@ class PlayPauseButton extends StatelessWidget {
             child: Center(
               child: IconButton(
                 padding: EdgeInsets.zero, // Remove default padding
-                constraints: BoxConstraints(), // Remove default constraints
+                constraints:
+                    const BoxConstraints(), // Remove default constraints
                 onPressed: () {
                   // Toggle play/pause based on the current playing status
                   if (playing) {

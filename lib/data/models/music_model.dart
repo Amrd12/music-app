@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:musicapp/data/models/Lyric_model.dart';
 
 // part 'info_music_model.g.dart';
 
@@ -30,6 +31,8 @@ class MusicModel extends HiveObject {
 
   @HiveField(7)
   double? seceunds;
+  @HiveField(8)
+  LyricsModel? lyrics;
 
   List<Map<String, String>>? formates;
 
@@ -41,6 +44,7 @@ class MusicModel extends HiveObject {
     this.formates,
     this.channelId = null,
     this.seceunds = null,
+    this.lyrics = null,
   });
 
   Map<String, dynamic> toMap() {
@@ -52,7 +56,8 @@ class MusicModel extends HiveObject {
       'channelId': channelId,
       'seceunds': seceunds,
       'isDetailed': isDetailed,
-      "formates": formates
+      "formates": formates,
+      "lyrics": lyrics?.toMap() ?? {}
     };
   }
 
@@ -67,6 +72,8 @@ class MusicModel extends HiveObject {
       thumbnail: List<String>.from((map['thumbnail'] as List<String>)),
       channelId: map['channelId'] != null ? map['channelId'] as String : null,
       seceunds: map['seceunds'] != null ? map['seceunds'] as double : null,
+      lyrics:
+          map.containsKey("lyrics") ? LyricsModel.fromMap(map["lyrics"]) : null,
     );
   }
 
@@ -84,6 +91,7 @@ class MusicModel extends HiveObject {
       double? startFrom,
       double? seceunds,
       bool? isDetailed,
+      LyricsModel? lyrics,
       List<Map<String, String>>? formates}) {
     return MusicModel(
         id: id ?? this.id,
@@ -92,6 +100,7 @@ class MusicModel extends HiveObject {
         thumbnail: thumbnail ?? this.thumbnail,
         channelId: channelId ?? this.channelId,
         seceunds: seceunds ?? this.seceunds,
-        formates: formates ?? this.formates);
+        formates: formates ?? this.formates,
+        lyrics: lyrics ?? this.lyrics);
   }
 }
