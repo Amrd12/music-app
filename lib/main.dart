@@ -7,7 +7,6 @@ import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:musicapp/ui/screens/layout_screen/view/layout_screen.dart';
-import 'package:musicapp/ui/screens/lyric_screen/cubit/lyric_cubit.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 import 'package:flutter/services.dart';
 
@@ -46,9 +45,7 @@ class MainApp extends StatelessWidget {
           BlocProvider(
             create: (context) => PlayerMiniCubit(),
           ),
-          BlocProvider(
-            create: (context) => LyricCubit(),
-          ),
+
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

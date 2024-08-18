@@ -23,9 +23,9 @@ class MusicWidget extends StatelessWidget {
             alignment: AlignmentDirectional.centerEnd,
             children: [
               Container(
-                  margin: const EdgeInsets.only(right: 40),
-                  width: 100,
                   height: 100,
+                  width: 100,
+                  margin: const EdgeInsets.only(right: 40),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: MyColors.myOrange),

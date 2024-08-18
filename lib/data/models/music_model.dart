@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_init_to_null
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+
 import 'package:musicapp/data/models/Lyric_model.dart';
 
 // part 'info_music_model.g.dart';
@@ -102,5 +104,25 @@ class MusicModel extends HiveObject {
         seceunds: seceunds ?? this.seceunds,
         formates: formates ?? this.formates,
         lyrics: lyrics ?? this.lyrics);
+  }
+
+  @override
+  bool operator ==(covariant MusicModel other) {
+    if (identical(this, other)) return true;
+    return other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        title.hashCode ^
+        author.hashCode ^
+        thumbnail.hashCode ^
+        isDetailed.hashCode ^
+        channelId.hashCode ^
+        startFrom.hashCode ^
+        seceunds.hashCode ^
+        lyrics.hashCode ^
+        formates.hashCode;
   }
 }

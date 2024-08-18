@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/data/repo/lyrics_repo.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
@@ -10,53 +11,81 @@ part 'player_mini_state.dart';
 
 class PlayerMiniCubit extends Cubit<PlayerMiniState> {
   PlayerMiniCubit() : super(PlayerMiniInitial());
-  final _audioHandler = locator.get<AudioPlayerHandler>();
+  final AudioPlayerHandler _audioHandler = locator.get<AudioPlayerHandler>();
+  final MusicRepo _musicRepo = locator.get<MusicRepo>();
+  final LyricsRepo _lyricsRepo = locator.get<LyricsRepo>();
 
-  MusicRepo musicRepo = locator.get<MusicRepo>();
   MusicModel? currentMusic;
-
   List<MusicModel> playList = [];
 
   Future<void> loadAudio(MusicModel model) async {
     await requestSongPermission();
+
+    model = await _fetchDetailedMusicModel(model);
+
+    currentMusic = model;
+    currentMusic?.lyrics = await _lyricsRepo.getLyric(currentMusic!.id);
+
+    playList = [model, ...await _musicRepo.getNextMusic(model.id)];
+
+    emit(PlayerMiniLoad(model, true, playList));
+    await _audioHandler.initSongs(musicModelSongs: playList);
+    await _audioHandler.play();
+    _listenToIndexChange();
+  }
+
+  void _listenToIndexChange() {
+    _audioHandler.currentIndexStream.listen((index) async {
+      final cureentindex = playList.indexWhere((e) => e == currentMusic) + 1;
+      if (index != null && cureentindex != index) {
+        currentMusic = playList[index];
+        seekTOIndex(index);
+      }
+    });
+  }
+
+  Future<MusicModel> _fetchDetailedMusicModel(MusicModel model) async {
     if (!model.isDetailed ||
         model.formates == null ||
         model.formates!.isEmpty) {
-      model = await musicRepo.getMusicData(model);
+      return await _musicRepo.getMusicData(model);
     }
-
-    print("model isdetailed::? ${model.isDetailed}");
-    currentMusic = model;
-    playList = [model, ...await musicRepo.getNextMusic(model.id)];
-
-    await _audioHandler.initSongs(
-        musicModelSongs: playList); // Start playing the audio
-    _audioHandler.play(); // Play the audio
-    emit(PlayerMiniLoad(model, true));
+    model.lyrics ??= await _lyricsRepo.getLyric(model.id);
+    return model;
   }
 
-  void setCuruntValue(double sec) {
-    emit(PlayerMiniSecounds(sec));
+  void visible(bool e) {
+    if (currentMusic != null) {
+      emit(PlayerMiniLoad(currentMusic!, e, playList));
+    }
   }
-
-  void visible(bool e) =>
-      currentMusic != null ? emit(PlayerMiniLoad(currentMusic!, e)) : null;
 
   Future<void> playNext() async {
-    _audioHandler.skipToNext();
-    MusicModel model =
-        playList[playList.indexWhere((e) => e.id == currentMusic!.id) + 1];
+    final index = playList.indexWhere((e) => e == currentMusic) + 1;
+    if (index < playList.length) {
+      currentMusic = await _fetchDetailedMusicModel(playList[index]);
 
-    currentMusic = await musicRepo.getMusicData(model);
-
-    emit(PlayerMiniLoad(currentMusic!, true));
+      await _audioHandler.skipToNext();
+      emit(PlayerMiniLoad(currentMusic!, true, playList));
+    }
   }
 
-  void playPrev() {
-    int index = playList.indexWhere((e) => e.id == currentMusic!.id) - 1;
-    if (index < 0) return;
+  Future<void> playPrev() async {
+    final index = playList.indexWhere((e) => e.id == currentMusic!.id) - 1;
+    if (index >= 0) {
+      currentMusic = await _fetchDetailedMusicModel(playList[index]);
+
+      await _audioHandler.skipToPrevious();
+      emit(PlayerMiniLoad(currentMusic!, true, playList));
+    }
+  }
+
+  Future<void> seekTOIndex(int index) async {
+    if (index < 0 || index > playList.length) return;
+
     currentMusic = playList[index];
-    emit(PlayerMiniLoad(currentMusic!, true));
-    _audioHandler.skipToPrevious();
+    currentMusic = await _fetchDetailedMusicModel(playList[index]);
+    _audioHandler.skipToQueueItem(index);
+    emit(PlayerMiniLoad(currentMusic!, true, playList));
   }
 }

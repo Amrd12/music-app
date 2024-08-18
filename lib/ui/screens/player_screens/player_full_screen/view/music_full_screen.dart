@@ -30,6 +30,9 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
     super.initState();
     scrollController = DraggableScrollableController();
     scrollController.addListener(changeSize);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.jumpTo(.3);
+    });
   }
 
   @override

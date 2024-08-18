@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/ui/screens/navigation_item.dart';
 import 'package:musicapp/ui/screens/player_screens/player_mini_screen/view/player_mini_screen.dart';
 
@@ -11,6 +13,14 @@ class LayoutScreen extends StatefulWidget {
 
 class _LayoutScreenState extends State<LayoutScreen> {
   int index = 0;
+  AudioPlayerHandler _audioHandler = locator.get<AudioPlayerHandler>();
+
+  @override
+  void initState() {
+    _audioHandler.context = context;
+    super.initState();
+  }
+
   List<Widget> screen = NavigationItem.values.map((t) => t.body).toList();
   void _onDestinationSelected(int selectedIndex) {
     index = selectedIndex;

@@ -14,4 +14,8 @@ class TextStyleManger {
       TextStyle(fontSize: 20, fontFamily: "LexendExa", color: MyColors.myWhite);
   static const TextStyle secTextLexendgery = TextStyle(
       fontSize: 20, fontFamily: "LexendExa", color: MyColors.myGreyLight);
+  static const TextStyle secTextLexendgeryLighter = TextStyle(
+      fontSize: 20,
+      fontFamily: "LexendExa",
+      color: Color.fromARGB(255, 212, 211, 211));
 }

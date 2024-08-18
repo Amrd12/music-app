@@ -11,7 +11,7 @@ class LyricsModel extends HiveObject {
   @HiveField(2)
   List<Map<String, dynamic>>? text; // Change type to Map<String, dynamic>
 
-  LyricsModel.LyricModel({
+  LyricsModel({
     required this.isPlain,
     this.plainText,
     this.text,
@@ -26,7 +26,7 @@ class LyricsModel extends HiveObject {
   }
 
   factory LyricsModel.fromMap(Map<String, dynamic> map) {
-    return LyricsModel.LyricModel(
+    return LyricsModel(
       isPlain: map['isPlain'] as bool,
       plainText: map['plainText'] as String?,
       text: map['Text'] != null

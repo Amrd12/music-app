@@ -1,6 +1,8 @@
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/data/repo/lyrics_repo.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/locator.dart';
 
@@ -8,8 +10,15 @@ import 'package:musicapp/locator.dart';
 class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
   final audioPlayer = AudioPlayer();
   final musicRepo = locator<MusicRepo>();
+  final LyricsRepo _lyricsRepo = locator.get<LyricsRepo>();
+
   List<MusicModel> playList = [];
+  late BuildContext context;
+
   int currentIndex = 0;
+
+  Stream<int?> get currentIndexStream => audioPlayer.currentIndexStream;
+
   // Create a new audio source
   UriAudioSource _createAudioSource(String url) {
     return ProgressiveAudioSource(Uri.parse(url));
@@ -32,7 +41,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     audioPlayer.playbackEventStream.listen(_broadcastState);
     queue.add(songs);
 
-    _listenForCurrentSongIndexChanges();
+    // _listenForCurrentSongIndexChanges();
 
     // Listen for processing state changes and skip to the next song when completed
     audioPlayer.processingStateStream.listen((state) {
@@ -72,8 +81,26 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
 
   @override
   Future<void> skipToNext() async {
-    if (currentIndex < queue.value.length) {
-      currentIndex++;
+    if (currentIndex < playList.length - 1) {
+      await skipToQueueItem(currentIndex + 1);
+    } else {
+      await stop();
+    }
+  }
+
+  @override
+  Future<void> skipToPrevious() async {
+    if (currentIndex > 0) {
+      await skipToQueueItem(currentIndex - 1);
+    } else {
+      await stop();
+    }
+  }
+
+  @override
+  Future<void> skipToQueueItem(int index) async {
+    if (index >= 0 && index < playList.length) {
+      currentIndex = index;
       MusicModel model = playList[currentIndex];
 
       if (!model.isDetailed ||
@@ -87,54 +114,21 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
         }
       }
 
-      var updatedItem = modelToMediaItem(model);
+      model.lyrics ??= await _lyricsRepo.getLyric(model.id);
 
-      // Create a new audio source for the updated item
-      var newAudioSource = _createAudioSource(updatedItem.id);
+      final updatedItem = modelToMediaItem(model);
+      final newAudioSource = _createAudioSource(updatedItem.id);
 
-      // Update the audio source of the audio player
       await audioPlayer.setAudioSource(newAudioSource,
           initialPosition: Duration.zero);
       try {
         await audioPlayer.seek(Duration.zero, index: currentIndex);
         await play();
       } catch (e) {
-        print('Error skipping to next track: $e');
+        print('Error skipping to queue item: $e');
       }
     } else {
-      await stop();
-    }
-  }
-
-  @override
-  Future<void> skipToPrevious() async {
-    if (currentIndex > 0) {
-      currentIndex--;
-      MusicModel model = playList[currentIndex];
-
-      if (model.isDetailed ||
-          model.formates != null ||
-          model.formates!.isEmpty) {
-        try {
-          model = await musicRepo.getMusicData(model);
-        } catch (e) {
-          print('Error fetching music data: $e');
-          return;
-        }
-      }
-
-      var updatedItem = modelToMediaItem(model);
-      var newAudioSource = _createAudioSource(updatedItem.id);
-      await audioPlayer.setAudioSource(newAudioSource,
-          initialPosition: Duration.zero);
-      try {
-        await audioPlayer.seek(Duration.zero, index: currentIndex);
-        await play();
-      } catch (e) {
-        print('Error skipping to previous track: $e');
-      }
-    } else {
-      await stop();
+      print('Invalid index: $index');
     }
   }
 
@@ -165,11 +159,13 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     ));
   }
 
-  void _listenForCurrentSongIndexChanges() {
-    audioPlayer.currentIndexStream.listen((index) {
-      final playlist = queue.value;
-      if (index == null || playlist.isEmpty) return;
-      mediaItem.add(playlist[index]);
-    });
-  }
+  // void _listenForCurrentSongIndexChanges() {
+  //   audioPlayer.currentIndexStream.listen((index) {
+  //     print(
+  //         "first===================================================================");
+  //     final playlist = queue.value;
+  //     if (index == null || playlist.isEmpty) return;
+  //     skipToQueueItem(index);
+  //   });
+  // }
 }

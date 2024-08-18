@@ -19,7 +19,7 @@ class PlayerModelDataWidget extends StatelessWidget {
         children: [
           if (showPhoto)
             Padding(
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: Container(
                   width: 60,
                   height: 60,
@@ -71,7 +71,7 @@ class PlayerModelDataWidget extends StatelessWidget {
                 ),
                 onPressed: () {},
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
             ],
           )
         ],
