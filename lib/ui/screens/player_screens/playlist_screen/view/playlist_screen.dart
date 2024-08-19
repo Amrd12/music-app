@@ -7,7 +7,7 @@ import 'package:musicapp/ui/screens/player_screens/playlist_screen/widgets/playl
 class PlaylistScreen extends StatelessWidget {
   PlaylistScreen({super.key});
   List<MusicModel> playlist = [];
-  MusicModel? currentmusic;
+  int? currentmusic;
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,28 @@ class PlaylistScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is PlayerMiniLoad) {
           playlist = state.currentPlaylist;
-          currentmusic = state.model;
+          currentmusic = state.index;
         }
 
         if (playlist.isEmpty || currentmusic == null) {
           return Center(child: Text("Nothing played"));
         }
 
-        int currentIndex = playlist.indexWhere((test) => test == currentmusic);
-
-        return ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
+        return ReorderableListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) => PlaylistItem(
+            key: ValueKey(index),
             model: playlist[index],
-            islast: index == currentIndex,
+            islast: currentmusic == index,
             index: index,
           ),
-          separatorBuilder: (context, index) => SizedBox(height: 10.0),
           itemCount: playlist.length,
+          onReorder: (oldIndex, newIndex) {
+            if (oldIndex < newIndex) newIndex--;
+            BlocProvider.of<PlayerMiniCubit>(context)
+                .onReorder(oldIndex, newIndex);
+          },
         );
       },
     );

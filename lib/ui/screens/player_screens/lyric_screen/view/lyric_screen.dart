@@ -23,7 +23,7 @@ class _LyricScreenState extends State<LyricScreen> {
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
         builder: (context, state) {
       if (state is PlayerMiniLoad) {
-        model = state.model;
+        model = state.currentPlaylist[state.index];
       }
       if (model.lyrics == null) {
         return const Center(child: Text("No Lyric Found"));

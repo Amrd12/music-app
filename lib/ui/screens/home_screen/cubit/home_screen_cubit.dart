@@ -21,7 +21,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     }
     List<Map<String, dynamic>> musicJsList = List<Map<String, dynamic>>.from(
         js["results"][ApiConstantsResponse.quickhomeVidoes]);
-
     final musicList = _musicRepo.parseMusicModel(musicJsList);
 
     emit(HomeScreenSuccess(musicList));

@@ -51,7 +51,7 @@ class MusicModel extends HiveObject {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'videoId': id,
       'title': title,
       'author': author,
       'thumbnail': thumbnail,

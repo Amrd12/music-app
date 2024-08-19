@@ -56,7 +56,7 @@ class PlaylistItem extends StatelessWidget {
         trailing:
             IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
         onTap: () =>
-            BlocProvider.of<PlayerMiniCubit>(context).seekTOIndex(index),
+            BlocProvider.of<PlayerMiniCubit>(context).seekToIndex(index),
       ),
     );
   }

@@ -18,7 +18,7 @@ void main() async {
   _audioHandler = await AudioService.init(
     builder: () => AudioPlayerHandler(),
     config: const AudioServiceConfig(
-      androidNotificationChannelId: 'com.example.musicapp.channel.audio',
+      androidNotificationChannelId: 'com.ryanheise.audioservice.channel.audio',
       androidNotificationChannelName: 'Music playback',
     ),
   );
@@ -45,7 +45,6 @@ class MainApp extends StatelessWidget {
           BlocProvider(
             create: (context) => PlayerMiniCubit(),
           ),
-
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -52,7 +52,7 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
       builder: (context, state) {
-        if (state is PlayerMiniLoad) model = state.model;
+        if (state is PlayerMiniLoad) model = state.currentPlaylist[state.index];
         return model == null
             ? const SizedBox.shrink()
             : Scaffold(
