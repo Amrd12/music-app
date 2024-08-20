@@ -15,7 +15,7 @@ class PlaylistScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is PlayerMiniLoad) {
           playlist = state.currentPlaylist;
-          currentmusic = state.model;
+          currentmusic = state.currentPlaylist[state.index];
         }
 
         if (playlist.isEmpty || currentmusic == null) {

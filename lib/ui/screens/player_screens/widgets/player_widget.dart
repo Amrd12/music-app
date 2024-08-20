@@ -22,27 +22,19 @@ class player_widget extends StatelessWidget {
   final bool showPhoto;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        BlocProvider.of<PlayerMiniCubit>(context).visible(false);
-
-        await Navigator.push(
-            context, MaterialPageRoute(builder: (_) => MusicFullScreen()));
-      },
-      child: Card(
-        color: bgColor.withOpacity(.5),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              PlayerModelDataWidget(model: model, showPhoto: showPhoto),
-              PlayPauseButton(),
-              SongProgress(
-                  totalDuration:
-                      Duration(seconds: model.seceunds!.round().toInt()))
-            ],
-          ),
+    return Card(
+      color: bgColor.withOpacity(.5),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PlayerModelDataWidget(model: model, showPhoto: showPhoto),
+            PlayPauseButton(),
+            SongProgress(
+                totalDuration:
+                    Duration(seconds: model.seceunds!.round().toInt()))
+          ],
         ),
       ),
     );

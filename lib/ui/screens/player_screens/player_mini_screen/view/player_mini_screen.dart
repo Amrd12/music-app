@@ -4,25 +4,30 @@ import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
+import 'package:musicapp/ui/screens/player_screens/player_full_screen/view/music_full_screen.dart';
 
 import '../../widgets/player_widget.dart';
 
 class PlayerMiniScreen extends StatelessWidget {
-  PlayerMiniScreen({super.key, this.visible = false});
+  PlayerMiniScreen({super.key});
   MusicModel? model;
-  bool visible;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
       builder: (context, state) {
         if (state is PlayerMiniLoad) {
-          model = state.model;
-          print(model!.title);
-          visible = state.visible;
+          model = state.currentPlaylist[state.index];
         }
-        return (visible && model != null)
-            ? player_widget(model: model as MusicModel)
+        return (model != null)
+            ? GestureDetector(
+                onTap: () async {
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const MusicFullScreen()));
+                },
+                child: player_widget(model: model as MusicModel))
             : const SizedBox.shrink();
       },
     );

@@ -6,10 +6,9 @@ sealed class PlayerMiniState {}
 final class PlayerMiniInitial extends PlayerMiniState {}
 
 final class PlayerMiniLoad extends PlayerMiniState {
-  MusicModel model;
-  bool visible;
+  int index;
   List<MusicModel> currentPlaylist;
-  PlayerMiniLoad(this.model, this.visible, this.currentPlaylist);
+  PlayerMiniLoad(this.index, this.currentPlaylist);
 }
 
 final class PlayerMiniGetFormates extends PlayerMiniState {}
@@ -19,8 +18,7 @@ final class PlayerMiniSecounds extends PlayerMiniState {
   PlayerMiniSecounds(this.sec);
 }
 
-final class PlayerMiniAddToBox extends PlayerMiniState {
-}
+final class PlayerMiniAddToBox extends PlayerMiniState {}
 
 final class PlayerMiniStart extends PlayerMiniState {}
 
