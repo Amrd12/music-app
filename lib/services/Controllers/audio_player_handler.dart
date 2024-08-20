@@ -9,55 +9,41 @@ import 'package:musicapp/locator.dart';
 /// An [AudioHandler] for playing a single item.
 class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
   final audioPlayer = AudioPlayer();
-  final musicRepo = locator<MusicRepo>();
+  final MusicRepo _musicRepo = locator<MusicRepo>();
   final LyricsRepo _lyricsRepo = locator.get<LyricsRepo>();
 
   List<MusicModel> playList = [];
-  late BuildContext context;
-
   int currentIndex = 0;
 
   Stream<int?> get currentIndexStream => audioPlayer.currentIndexStream;
 
-  // Create a new audio source
-  UriAudioSource _createAudioSource(String url) {
-    return ProgressiveAudioSource(Uri.parse(url));
-  }
+  void setPlaylist(List<MusicModel> playlist) => playList = playlist;
+
+  UriAudioSource _createAudioSource(String url) =>
+      ProgressiveAudioSource(Uri.parse(url));
 
   // Function to initialize the songs and set up the audio player
-  Future<void> initSongs(
-      {required List<MusicModel> musicModelSongs, int? mode}) async {
-    playList = musicModelSongs;
-    final songs =
-        musicModelSongs.map((i) => modelToMediaItem(i, mode: mode)).toList();
+  Future<void> initSongs({int index = 0}) async {
+    currentIndex = index;
+
+    final songs = playList.map((i) => modelToMediaItem(i)).toList();
     final audioSources =
         songs.map((item) => _createAudioSource(item.id)).toList();
 
-    // Set the audio source of the audio player
     await audioPlayer
         .setAudioSource(ConcatenatingAudioSource(children: audioSources));
-
-    // Listen for playback events and broadcast the state
     audioPlayer.playbackEventStream.listen(_broadcastState);
     queue.add(songs);
 
-    // _listenForCurrentSongIndexChanges();
+    await skipToQueueItem(index);
 
-    // Listen for processing state changes and skip to the next song when completed
     audioPlayer.processingStateStream.listen((state) {
       if (state == ProcessingState.completed) skipToNext();
     });
   }
 
-  MediaItem modelToMediaItem(MusicModel model, {int? mode}) {
-    var formatData = (mode == null ||
-            model.formates == null ||
-            mode >= model.formates!.length)
-        ? model.formates?.first.values.first
-        : model.formates![mode].values.first;
-
-    formatData ??= model.id;
-
+  MediaItem modelToMediaItem(MusicModel model) {
+    final formatData = model.formates?.first.values.first ?? model.id;
     return MediaItem(
       id: formatData,
       title: model.title,
@@ -107,7 +93,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
           model.formates == null ||
           model.formates!.isEmpty) {
         try {
-          model = await musicRepo.getMusicData(model);
+          model = await _musicRepo.getMusicData(model);
         } catch (e) {
           print('Error fetching music data: $e');
           return;

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:meta/meta.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/repo/lyrics_repo.dart';
@@ -22,24 +23,34 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     await requestSongPermission();
 
     model = await _fetchDetailedMusicModel(model);
-
-    currentMusic = model;
-    currentMusic?.lyrics = await _lyricsRepo.getLyric(currentMusic!.id);
-
     playList = [model, ...await _musicRepo.getNextMusic(model.id)];
+    await startPlaying(0);
+  }
 
-    emit(PlayerMiniLoad(model, true, playList));
-    await _audioHandler.initSongs(musicModelSongs: playList);
+  Future<void> loadPlaylist(List<MusicModel> playlist, int startIndex) async {
+    if (playlist.isEmpty || startIndex < 0 || startIndex >= playlist.length) {
+      throw ArgumentError('Invalid playlist or startIndex');
+    }
+
+    playList = playlist;
+    await startPlaying(startIndex);
+  }
+
+  Future<void> startPlaying(int startIndex) async {
+    _audioHandler.setPlaylist(playList);
+
+    emit(PlayerMiniLoad(playList[startIndex], true, playList));
+    await _audioHandler.initSongs(index: startIndex);
     await _audioHandler.play();
+
     _listenToIndexChange();
   }
 
   void _listenToIndexChange() {
-    _audioHandler.currentIndexStream.listen((index) async {
-      final cureentindex = playList.indexWhere((e) => e == currentMusic) + 1;
-      if (index != null && cureentindex != index) {
-        currentMusic = playList[index];
-        seekTOIndex(index);
+    _audioHandler.audioPlayer.processingStateStream.listen((state) {
+      if (state == ProcessingState.completed) {
+        playNext();
+        print("===============================playnext======================");
       }
     });
   }
@@ -64,7 +75,6 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     final index = playList.indexWhere((e) => e == currentMusic) + 1;
     if (index < playList.length) {
       currentMusic = await _fetchDetailedMusicModel(playList[index]);
-
       await _audioHandler.skipToNext();
       emit(PlayerMiniLoad(currentMusic!, true, playList));
     }
@@ -74,7 +84,6 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     final index = playList.indexWhere((e) => e.id == currentMusic!.id) - 1;
     if (index >= 0) {
       currentMusic = await _fetchDetailedMusicModel(playList[index]);
-
       await _audioHandler.skipToPrevious();
       emit(PlayerMiniLoad(currentMusic!, true, playList));
     }

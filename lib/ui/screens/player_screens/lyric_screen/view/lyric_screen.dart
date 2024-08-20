@@ -26,7 +26,7 @@ class _LyricScreenState extends State<LyricScreen> {
         model = state.model;
       }
       if (model.lyrics == null) {
-        return const Center(child: Text("No Lyric Found"));
+        return const Center(child: Text("null "));
       }
 
       if (model.lyrics!.isPlain) {
