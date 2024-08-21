@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../../constans/strings.dart';
+import 'package:musicapp/data/models/playlist_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../constans/text_style_manager.dart';
 
 class RecommendWidget extends StatelessWidget {
-  const RecommendWidget({super.key});
+  const RecommendWidget({super.key, required this.model});
+  final PlaylistModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +15,11 @@ class RecommendWidget extends StatelessWidget {
         padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
             // color: MyColors.myOrange,
-            image: const DecorationImage(image: NetworkImage(recPicUrl)),
+            image: DecorationImage(
+                image: CachedNetworkImageProvider(model.thumbnail)),
             borderRadius: BorderRadius.circular(35)),
-        child: const Text(
-          "Daily Mix",
+        child: Text(
+          model.title,
           style: TextStyleManger.secTextLexend,
         ),
       ),

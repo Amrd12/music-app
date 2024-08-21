@@ -12,9 +12,11 @@ class PlaylistItem extends StatelessWidget {
       required this.model,
       required this.islast,
       required this.index});
+
   final MusicModel model;
   final bool islast;
   final int index;
+
   @override
   Widget build(BuildContext context) {
     return Container(

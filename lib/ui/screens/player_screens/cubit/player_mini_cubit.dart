@@ -95,4 +95,9 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     _audioHandler.skipToQueueItem(index);
     emit(PlayerMiniLoad(index, playList));
   }
+
+  void onReorder(int oldIndex, int newIndex) {
+    final oldMusic = playList.removeAt(oldIndex);
+    playList.insert(newIndex, oldMusic);
+  }
 }

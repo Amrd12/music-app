@@ -6,7 +6,7 @@ class ApiConstantsRequest {
   static const String lyricsPlain = "music/lyrics/plain";
 
   static const String next = "next";
-  // static const String register = "register.php";
+  static const String playlistInfo = "getPlaylist";
   // static const String messagesAdvice = "messages_advice.php";
 }
 

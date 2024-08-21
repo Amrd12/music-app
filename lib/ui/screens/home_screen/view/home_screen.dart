@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/artist_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/recommed_list.dart';
@@ -32,13 +33,27 @@ class _HomeScreenState extends State<HomeScreen> {
           BlocBuilder<HomeScreenCubit, HomeScreenState>(
             builder: (context, state) {
               if (state is HomeScreenSuccess) {
-                List<MusicModel> modelList = state.musicModel;
+                List<MusicModel>? modelList = state.quickPicks;
+                List<PlaylistModel>? boostyourMood = state.boostYourMood;
+                List<PlaylistModel>? summer = state.summer_2024;
+                List<PlaylistModel>? afterWorkFeeling = state.afterWorkFeeling;
+
                 return Column(
                   children: [
                     const HomeBodyAppBar(),
                     const ArtistList(),
-                    MusicWidgetList(modelList: modelList),
-                    const RecommedList()
+                    if (modelList != null)
+                      MusicWidgetList(modelList: modelList),
+                    if (boostyourMood != null)
+                      RecommedList(
+                          title: "Boost Your Mind", playlist: boostyourMood),
+                    if (summer != null)
+                      RecommedList(
+                          title: "summer_2024_☀️🌴🍉", playlist: summer),
+                    if (afterWorkFeeling != null)
+                      RecommedList(
+                          title: "After Work Feeling",
+                          playlist: afterWorkFeeling)
                   ],
                 );
               } else {

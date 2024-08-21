@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:musicapp/constans/themedata.dart';
+import 'package:musicapp/data/models/playlist_model.dart';
+import 'package:musicapp/data/repo/playlist_repo.dart';
 import 'package:musicapp/locator.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';

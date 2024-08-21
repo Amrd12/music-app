@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:musicapp/locator.dart';
 import 'package:musicapp/ui/screens/navigation_item.dart';
 import 'package:musicapp/ui/screens/player_screens/player_mini_screen/view/player_mini_screen.dart';
 
