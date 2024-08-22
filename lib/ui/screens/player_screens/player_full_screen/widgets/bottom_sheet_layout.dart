@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/ui/screens/player_screens/lyric_screen/view/lyric_screen.dart';
-import 'package:musicapp/ui/screens/player_screens/playlist_screen/view/playlist_screen.dart';
+import 'package:musicapp/ui/screens/player_screens/current_playlist_screen/view/current_playlist_screen.dart';
 
 class BottomSheetLayout extends StatefulWidget {
   const BottomSheetLayout({super.key, required this.scrollcontroller});
@@ -12,7 +12,7 @@ class BottomSheetLayout extends StatefulWidget {
 
 class _BottomSheetLayoutState extends State<BottomSheetLayout> {
   int index = 0;
-  List<Widget> screen = [const LyricScreen(), PlaylistScreen()];
+  List<Widget> screen = [const LyricScreen(), CurrentPlaylistScreen()];
   @override
   Widget build(BuildContext context) {
     return Column(

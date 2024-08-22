@@ -10,7 +10,7 @@ class PlaylistRepo {
       List<PlaylistModel>.from(map.map((i) => PlaylistModel.fromMap(i)))
           .toList();
 
-  Future<PlaylistModel?> getPlaylistData(PlaylistModel playlist) async {
+  Future<PlaylistModel> getPlaylistData(PlaylistModel playlist) async {
     final js = await _apiService.getPlaylistData(playlist.id);
     List<MusicModel> musicList = js["results"] != null
         ? List<MusicModel>.from(js["results"].map((e) => MusicModel.fromMap(e)))

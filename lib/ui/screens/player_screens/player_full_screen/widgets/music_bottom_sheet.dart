@@ -5,7 +5,7 @@ import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/player_screens/lyric_screen/view/lyric_screen.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
-import 'package:musicapp/ui/screens/player_screens/playlist_screen/view/playlist_screen.dart';
+import 'package:musicapp/ui/screens/player_screens/current_playlist_screen/view/current_playlist_screen.dart';
 
 import 'bottom_sheet_layout.dart';
 
@@ -13,8 +13,6 @@ class MusicBottomSheet extends StatelessWidget {
   MusicBottomSheet({super.key, required this.scrollController});
 
   final DraggableScrollableController scrollController;
-
-  late MusicModel model;
 
   @override
   Widget build(BuildContext context) {

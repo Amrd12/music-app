@@ -27,12 +27,14 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     await startPlaying(0);
   }
 
-  Future<void> loadPlaylist(List<MusicModel> playlist, int startIndex) async {
+  Future<void> loadPlaylist(List<MusicModel> playlist,
+      {int startIndex = 0}) async {
     if (playlist.isEmpty || startIndex < 0 || startIndex >= playlist.length) {
       throw ArgumentError('Invalid playlist or startIndex');
     }
 
     playList = playlist;
+    playlist[startIndex] = await _musicRepo.getMusicData(playlist[startIndex]);
     await startPlaying(startIndex);
   }
 
