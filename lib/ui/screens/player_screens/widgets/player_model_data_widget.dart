@@ -28,7 +28,10 @@ class PlayerModelDataWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: MyColors.myOrange,
                   ),
-                  child: CachedNetworkImage(imageUrl: model.thumbnail.first),
+                  child: CachedNetworkImage(
+                    imageUrl: model.thumbnail.first,
+                    fit: BoxFit.cover,
+                  ),
                 )),
           Expanded(
             child: Column(

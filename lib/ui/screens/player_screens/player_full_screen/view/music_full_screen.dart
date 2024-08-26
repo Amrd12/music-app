@@ -26,16 +26,9 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
     scrollController = DraggableScrollableController();
     scrollController.addListener(changeSize);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollController.jumpTo(.3);
+      scrollController.jumpTo(.08);
     });
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   final playerMiniCubit = BlocProvider.of<PlayerMiniCubit>(context);
-  //   playerMiniCubit.visible(true);
-  // }
 
   @override
   void dispose() {
@@ -47,7 +40,10 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
       builder: (context, state) {
-        if (state is PlayerMiniLoad) model = state.currentPlaylist[state.index];
+        if (state is PlayerMiniLoad) {
+          model = state.currentPlaylist[state.index];
+        }
+
         return model == null
             ? const SizedBox.shrink()
             : Scaffold(
@@ -57,23 +53,29 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (height <= .7) PlayerPhotoFull(model: model),
-                        if (height >= .7) const SizedBox(height: 25),
+                        if (height < 0.65) PlayerPhotoFull(model: model),
+                        if (height >= 0.65) const SizedBox(height: 25),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: player_widget(
+                          padding: const EdgeInsets.only(bottom: 0.0),
+                          child: PlayerWidget(
                             showPhoto: false,
                             model: model!,
                             bgColor: Colors.transparent,
                           ),
                         ),
                         SizedBox(
-                            height: height * MediaQuery.of(context).size.height)
+                            height:
+                                height * MediaQuery.of(context).size.height),
                       ],
                     ),
-                    IconButton(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: IconButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.arrow_back_ios_new, size: 40)),
+                        icon: const Icon(Icons.keyboard_arrow_down_rounded,
+                            size: 40),
+                      ),
+                    ),
                     MusicBottomSheet(scrollController: scrollController),
                   ],
                 ),

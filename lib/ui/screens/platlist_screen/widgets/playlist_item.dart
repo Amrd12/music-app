@@ -7,32 +7,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
 class PlaylistItem extends StatelessWidget {
-  const PlaylistItem(
-      {super.key,
-      required this.model,
-      required this.islast,
-      required this.index});
+  const PlaylistItem({super.key, required this.model, required this.onTap});
 
   final MusicModel model;
-  final bool islast;
-  final int index;
+
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: islast == true
-          ? MyColors.myGreyHeavy.withOpacity(.8)
-          : Colors.transparent,
+      color: Colors.transparent,
       child: ListTile(
         leading: Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Container(
               width: 60,
               height: 60,
-              clipBehavior: Clip.hardEdge,
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: MyColors.myOrange,
+                color: const Color.fromARGB(255, 226, 32, 42),
               ),
               child: CachedNetworkImage(
                 imageUrl: model.thumbnail.first,
@@ -57,8 +51,7 @@ class PlaylistItem extends StatelessWidget {
         ),
         trailing:
             IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
-        onTap: () =>
-            BlocProvider.of<PlayerMiniCubit>(context).seekTOIndex(index),
+        onTap: onTap,
       ),
     );
   }

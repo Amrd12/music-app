@@ -4,7 +4,7 @@ import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/locator.dart';
 
 class PlaylistRepo {
-  PlaylistApiService _apiService = locator.get<PlaylistApiService>();
+  final PlaylistApiService _apiService = locator.get<PlaylistApiService>();
 
   List<PlaylistModel> parsePlaylistModel(List<Map<String, dynamic>> map) =>
       List<PlaylistModel>.from(map.map((i) => PlaylistModel.fromMap(i)))

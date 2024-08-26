@@ -53,6 +53,7 @@ class MainApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          title: "music app",
           debugShowCheckedModeBanner: false,
           theme: themedata,
           home: const Scaffold(

@@ -6,7 +6,7 @@ import 'package:musicapp/data/repo/lyrics_repo.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/data/repo/playlist_repo.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
-import 'package:musicapp/services/database/Hive_music.dart';
+import 'package:musicapp/services/database/hive_music.dart';
 
 final locator = GetIt.instance;
 

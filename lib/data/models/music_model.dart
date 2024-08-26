@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
-import 'package:musicapp/data/models/Lyric_model.dart';
+import 'package:musicapp/data/models/lyric_model.dart';
 
 // part 'info_music_model.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:musicapp/data/api/lyrics_api_service.dart';
-import 'package:musicapp/data/models/Lyric_model.dart';
+import 'package:musicapp/data/models/lyric_model.dart';
 import 'package:musicapp/locator.dart';
 
 class LyricsRepo {

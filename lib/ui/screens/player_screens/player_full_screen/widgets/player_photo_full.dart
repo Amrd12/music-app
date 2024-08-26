@@ -38,7 +38,7 @@ class _CustomClipperExample extends CustomClipper<Path> {
       size.width * .45,
       size.height,
       size.width,
-      size.height * 0.85,
+      size.height * 0.8,
     );
     path.lineTo(size.width, 0);
     path.close();

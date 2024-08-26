@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musicapp/constans/colors.dart';
-import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 import 'package:musicapp/ui/screens/player_screens/player_full_screen/view/music_full_screen.dart';
@@ -27,7 +25,7 @@ class PlayerMiniScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (_) => const MusicFullScreen()));
                 },
-                child: player_widget(model: model as MusicModel))
+                child: PlayerWidget(model: model as MusicModel))
             : const SizedBox.shrink();
       },
     );

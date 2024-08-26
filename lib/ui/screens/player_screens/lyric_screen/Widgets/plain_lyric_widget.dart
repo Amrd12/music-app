@@ -17,7 +17,7 @@ class PlainLyricWidget extends StatelessWidget {
         child: Text(
           textAlign: TextAlign.center,
           model.lyrics!.plainText!,
-          style: TextStyleManger.mainTextLexend,
+          style: TextStyleManger.mainTextLexend.copyWith(fontSize: 25),
         ));
   }
 }

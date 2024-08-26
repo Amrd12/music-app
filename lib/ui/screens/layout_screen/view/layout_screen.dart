@@ -10,7 +10,7 @@ class LayoutScreen extends StatefulWidget {
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
-  int index = 0;
+  int index = 1;
 
   @override
   void initState() {

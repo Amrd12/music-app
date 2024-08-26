@@ -6,5 +6,5 @@ const recPicUrl =
 // routs
 const navigationRoute = "/";
 const homeRoute = "/home";
-const exploreRoute = "/explore";
+const searchRoute = "/search";
 const layoutRoute = "/layout";

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:musicapp/ui/screens/player_screens/player_mini_screen/view/player_mini_screen.dart';
 
@@ -10,16 +9,18 @@ class CustomPushScreen extends StatelessWidget {
     return Scaffold(
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Stack(
-          alignment: Alignment.topLeft,
-          children: [
-            screen,
-            IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.arrow_back_ios_new, size: 40)),
-          ],
+        Expanded(
+          child: Stack(
+            alignment: Alignment.topLeft,
+            children: [
+              screen,
+              IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back_ios_new, size: 40)),
+            ],
+          ),
         ),
-        PlayerMiniScreen()
+        PlayerMiniScreen(),
       ]),
     );
   }

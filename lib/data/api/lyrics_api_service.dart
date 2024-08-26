@@ -1,6 +1,6 @@
 import 'package:musicapp/constans/api_constants.dart';
 import 'package:musicapp/data/api/api_service.dart';
-import "package:musicapp/data/models/Lyric_model.dart";
+import "package:musicapp/data/models/lyric_model.dart";
 
 class LyricsApiService extends ApiService {
   ///get [LyricsModel] Lyrics data from the api
@@ -20,9 +20,4 @@ class LyricsApiService extends ApiService {
     data["isPlain"] = isPlain;
     return data;
   }
-}
-
-void main(List<String> args) async {
-  final data = await LyricsApiService().getMusicMapLyrics("P7z1fKkW0j8");
-  print(data);
 }

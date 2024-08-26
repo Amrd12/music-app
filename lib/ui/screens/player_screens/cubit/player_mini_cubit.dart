@@ -34,7 +34,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     }
 
     playList = playlist;
-    playlist[startIndex] = await _musicRepo.getMusicData(playlist[startIndex]);
+    playlist[startIndex] = await _fetchDetailedMusicModel(playlist[startIndex]);
     await startPlaying(startIndex);
   }
 
