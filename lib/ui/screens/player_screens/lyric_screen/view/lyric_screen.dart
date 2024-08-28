@@ -32,7 +32,7 @@ class _LyricScreenState extends State<LyricScreen> {
       if (model.lyrics!.isPlain) {
         return PlainLyricWidget(model: model);
       }
-      return Center(child: Text("not plain"));
+      return const Center(child: Text("not plain"));
     });
   }
 }

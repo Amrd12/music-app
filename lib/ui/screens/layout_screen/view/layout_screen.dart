@@ -30,7 +30,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(child: IndexedStack(index: index, children: screen)),
-          PlayerMiniScreen()
+          const PlayerMiniScreen()
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

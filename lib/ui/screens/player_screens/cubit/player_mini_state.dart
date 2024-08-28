@@ -1,6 +1,5 @@
 part of 'player_mini_cubit.dart';
 
-@immutable
 sealed class PlayerMiniState {}
 
 final class PlayerMiniInitial extends PlayerMiniState {}

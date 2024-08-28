@@ -8,7 +8,7 @@ import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart'
 // PlayPauseButton class responsible for displaying a play/pause button
 class PlayPauseButton extends StatelessWidget {
   // SongHandler instance to control playback
-  AudioPlayerHandler songHandler = locator.get<AudioPlayerHandler>();
+ final AudioPlayerHandler songHandler = locator.get<AudioPlayerHandler>();
 
   // Size of the button
   final double size = 30.0;

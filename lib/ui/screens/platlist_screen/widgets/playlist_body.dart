@@ -1,112 +1,80 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/ui/main_widgets/custom_bottom_sheet.dart';
-import 'package:musicapp/ui/main_widgets/custom_photo.dart';
+import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_item_full.dart';
+import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_item_mini.dart';
 import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_list.dart';
-import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
 class PlaylistBody extends StatefulWidget {
+  const PlaylistBody({super.key, required this.model});
   final PlaylistModel model;
 
-  PlaylistBody({super.key, required this.model});
-
   @override
-  _PlaylistBodyState createState() => _PlaylistBodyState();
+  State<PlaylistBody> createState() => _PlaylistBodyState();
 }
 
 class _PlaylistBodyState extends State<PlaylistBody> {
   late DraggableScrollableController scrollController;
-  double height = 0.6; // Set initial height proportion
+  double height = 0.0;
 
   @override
   void initState() {
     super.initState();
     scrollController = DraggableScrollableController();
     scrollController.addListener(changeSize);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.jumpTo(.3);
+    });
   }
 
   @override
   void dispose() {
     scrollController.removeListener(changeSize);
-    scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Column(
+            children: [
+              if (height < .61)
+                PlaylistItemFull(model: widget.model, size: (1 - height)),
+              if (height >= .61)
+                SizedBox(
+                  height: (1 - height) * MediaQuery.of(context).size.height,
+                  child: PlaylistItemMini(model: widget.model),
+                ),
+              Expanded(
+                  child: SizedBox(
+                      height: height * MediaQuery.of(context).size.height)),
+            ],
+          ),
+          CustomBottomSheet(
+            scrollController: scrollController,
+            maxSize: .8,
+            minSize: .3,
+            initSize: .5,
+            bgcolor: MyColors.myGreyLight.withOpacity(.5),
+            screen: (context, controller) => PlaylistList(
+              playlistModel: widget.model,
+              scrollController: controller,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void changeSize() {
     setState(() {
-      height = scrollController
-          .size; // Update the height based on the scroll position
+      height = scrollController.size;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // CustomPlaylistPhoto should be flexible in height based on the scroll
-            if (height < .8)
-              Expanded(
-                  child:
-                      Center(child: CustomPlaylistPhoto(model: widget.model))),
-            if (height >= .8)
-              const SizedBox(height: 25), // Placeholder if needed
-              
-            SizedBox(
-              height: height * MediaQuery.of(context).size.height,
-              child: CustomBottomSheet(
-                scrollController: scrollController,
-                maxSize: .8,
-                minSize: 0.5,
-                initSize: height,
-                bgcolor: MyColors.myGreyLight.withOpacity(.5),
-                builder: (context, scrollController) => PlaylistList(
-                  playlistModel: widget.model,
-                  scrollController: scrollController,
-                ),
-              ),
-            ),
-          ],
-        ),
-        // Back button or any overlay elements
-      ],
-    );
-  }
-}
-
-class CustomPlaylistPhoto extends StatelessWidget {
-  const CustomPlaylistPhoto({
-    super.key,
-    required this.model,
-  });
-
-  final PlaylistModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        CustomPhoto(
-          imageUrl: model.thumbnail,
-          radius: 50.0,
-          margain: 15.0,
-        ),
-        IconButton(
-          onPressed: () async => await BlocProvider.of<PlayerMiniCubit>(context)
-              .loadPlaylist(model.musics!),
-          icon: CircleAvatar(
-            backgroundColor:
-                Theme.of(context).colorScheme.secondary.withOpacity(.7),
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
-            child: const Icon(Icons.play_arrow, size: 40),
-          ),
-        ),
-      ],
-    );
+    // log(height.toString());
   }
 }

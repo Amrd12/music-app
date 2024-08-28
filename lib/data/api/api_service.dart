@@ -1,7 +1,6 @@
 import 'dart:convert';
-
+import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:musicapp/constans/api_constants.dart';
 
@@ -23,16 +22,16 @@ class ApiService {
       {Map<String, dynamic>? queryParameters}) async {
     try {
       Response res = await dio.get(url, queryParameters: queryParameters);
-      debugPrint("Status Code : ${res.statusCode.toString()}");
+      log("Status Code : ${res.statusCode.toString()}");
       if (res.data.runtimeType == String) {
-        debugPrint("String Found");
+        log("String Found");
         return res.data == "" ? {"error": "empty"} : jsonDecode(res.data);
       } else if (res.data.runtimeType == List) {
         return {"results": res.data};
       }
       return res.data;
     } catch (e) {
-      debugPrint("api error : :  ${e.toString()}");
+      log("api error : :  ${e.toString()}");
       return {"error": e.toString()};
     }
   }

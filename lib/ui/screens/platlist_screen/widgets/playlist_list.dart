@@ -9,24 +9,23 @@ class PlaylistList extends StatelessWidget {
       {super.key, required this.playlistModel, required this.scrollController});
   final PlaylistModel playlistModel;
   final ScrollController scrollController;
-
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      physics: const ClampingScrollPhysics(),
-      shrinkWrap: true,
       controller: scrollController,
       itemBuilder: (context, index) {
         return PlaylistItem(
-            model: playlistModel.musics![index],
-            onTap: () => onTap(index, context));
+          model: playlistModel.musics![index],
+          onTap: () => onTap(index, context),
+        );
       },
-      separatorBuilder: (context, index) => SizedBox(height: 10),
+      separatorBuilder: (context, index) => const SizedBox(height: 10),
       itemCount: playlistModel.musics!.length,
     );
   }
 
-  void onTap(int index, BuildContext context) =>
-      BlocProvider.of<PlayerMiniCubit>(context)
-          .loadPlaylist(playlistModel.musics!, startIndex: index);
+  void onTap(int index, BuildContext context) {
+    BlocProvider.of<PlayerMiniCubit>(context)
+        .loadPlaylist(playlistModel.musics!, startIndex: index);
+  }
 }

@@ -1,26 +1,20 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
-import 'package:musicapp/ui/main_widgets/custom_bottom_sheet.dart';
-import 'package:musicapp/ui/main_widgets/custom_photo.dart';
 import 'package:musicapp/ui/screens/platlist_screen/cubit/playlist_cubit.dart';
-import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_list.dart';
-import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 
 import '../widgets/playlist_body.dart';
 
 class PlaylistScreen extends StatefulWidget {
-  PlaylistScreen({super.key, required this.playlistModel});
-  PlaylistModel playlistModel;
+  const PlaylistScreen({super.key, required this.playlistModel});
+  final PlaylistModel playlistModel;
 
   @override
   State<PlaylistScreen> createState() => _PlaylistScreenState();
 }
 
 class _PlaylistScreenState extends State<PlaylistScreen> {
-  PlaylistModel get model => widget.playlistModel;
-  set model(PlaylistModel e) => widget.playlistModel = e;
+  late PlaylistModel model = widget.playlistModel;
 
   @override
   void initState() {
@@ -34,7 +28,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     return BlocBuilder<PlaylistCubit, PlaylistState>(
       builder: (context, state) {
         if (state is PlaylistLoad) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (state is PlaylistError) {
           return Center(child: Text(state.error));

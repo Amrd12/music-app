@@ -4,16 +4,17 @@ class CustomBottomSheet extends StatelessWidget {
   final DraggableScrollableController scrollController;
   final double maxSize, minSize, initSize;
   final Color bgcolor;
-  final Widget Function(BuildContext context, ScrollController scrollController)
-      builder;
+  // final Widget screen;
+  final Widget Function(
+      BuildContext constext, ScrollController scrollContraoller) screen;
 
-  CustomBottomSheet({
+  const CustomBottomSheet({
     super.key,
     required this.scrollController,
     required this.maxSize,
     required this.minSize,
     required this.initSize,
-    required this.builder,
+    required this.screen,
     this.bgcolor = Colors.transparent,
   });
 
@@ -25,10 +26,8 @@ class CustomBottomSheet extends StatelessWidget {
       minChildSize: minSize,
       maxChildSize: maxSize,
       expand: false,
-      builder: (context, scrollController) {
-        return Container(
-          height: double.maxFinite,
-          width: double.maxFinite,
+      builder: (context, s) {
+        return DecoratedBox(
           decoration: BoxDecoration(
             color: bgcolor,
             borderRadius: const BorderRadius.only(
@@ -36,7 +35,10 @@ class CustomBottomSheet extends StatelessWidget {
               topRight: Radius.circular(50),
             ),
           ),
-          child: builder(context, scrollController),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: screen(context, s),
+          ),
         );
       },
     );

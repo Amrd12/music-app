@@ -14,7 +14,7 @@ class BottomSheetLayout extends StatefulWidget {
 
 class _BottomSheetLayoutState extends State<BottomSheetLayout> {
   int index = 0;
-  List<Widget> screen = [const LyricScreen(), CurrentPlaylistScreen()];
+  List<Widget> screen = [const LyricScreen(), const CurrentPlaylistScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _BottomSheetLayoutState extends State<BottomSheetLayout> {
         SliverToBoxAdapter(
           child: Container(
             height: 35, // Increased height for better visibility
-            margin: EdgeInsets.only(bottom: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -53,8 +53,8 @@ class _BottomSheetLayoutState extends State<BottomSheetLayout> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.add),
-                  padding: EdgeInsets.all(0),
+                  icon: const Icon(Icons.add),
+                  padding: const EdgeInsets.all(0),
                 )
               ],
             ),

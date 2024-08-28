@@ -21,6 +21,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   just_audio: ^0.9.37
+  modal_bottom_sheet: ^3.0.0
   permission_handler: ^11.3.1
 dev_dependencies:
   flutter_lints: ^3.0.0

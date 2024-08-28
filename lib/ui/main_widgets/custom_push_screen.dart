@@ -14,13 +14,16 @@ class CustomPushScreen extends StatelessWidget {
             alignment: Alignment.topLeft,
             children: [
               screen,
-              IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(Icons.arrow_back_ios_new, size: 40)),
+              Padding(
+                padding: const EdgeInsets.only(top: 25, left: 5),
+                child: IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.arrow_back_ios_new, size: 30)),
+              ),
             ],
           ),
         ),
-        PlayerMiniScreen(),
+        const PlayerMiniScreen(),
       ]),
     );
   }

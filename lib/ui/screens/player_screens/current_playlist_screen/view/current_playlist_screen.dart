@@ -5,12 +5,13 @@ import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart'
 import 'package:musicapp/ui/screens/player_screens/current_playlist_screen/widgets/current_playlist_item.dart';
 
 class CurrentPlaylistScreen extends StatelessWidget {
-  CurrentPlaylistScreen({super.key});
-  List<MusicModel> playlist = [];
-  MusicModel? currentmusic;
+  const CurrentPlaylistScreen({super.key});
 
   @override
+
   Widget build(BuildContext context) {
+    List<MusicModel> playlist = [];
+    MusicModel? currentmusic;
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
       builder: (context, state) {
         if (state is PlayerMiniLoad) {
@@ -39,3 +40,4 @@ class CurrentPlaylistScreen extends StatelessWidget {
     );
   }
 }
+

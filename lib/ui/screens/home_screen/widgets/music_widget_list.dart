@@ -5,8 +5,9 @@ import 'package:musicapp/ui/screens/home_screen/widgets/music_widget.dart';
 import '../../../../constans/text_style_manager.dart';
 
 class MusicWidgetList extends StatelessWidget {
-  MusicWidgetList({super.key, required this.modelList});
-  List<MusicModel> modelList;
+  const MusicWidgetList({super.key, required this.modelList});
+  final List<MusicModel> modelList;
+
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -8,6 +8,7 @@ class LyricsRepo {
 
   Future<LyricsModel> getLyric(String id) async {
     final data = await lyricsApiService.getMusicMapLyrics(id);
+    
     if (data["isPlain"]) {
       return LyricsModel(
           isPlain: true, plainText: data["description"]["text"]);

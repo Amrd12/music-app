@@ -7,11 +7,11 @@ import 'package:musicapp/ui/screens/player_screens/player_full_screen/view/music
 import '../../widgets/player_widget.dart';
 
 class PlayerMiniScreen extends StatelessWidget {
-  PlayerMiniScreen({super.key});
-  MusicModel? model;
+  const PlayerMiniScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    MusicModel? model;
     return BlocBuilder<PlayerMiniCubit, PlayerMiniState>(
       builder: (context, state) {
         if (state is PlayerMiniLoad) {

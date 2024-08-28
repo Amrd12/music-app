@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
+
 import 'package:musicapp/constans/api_constants.dart';
 import 'package:musicapp/data/api/music_api_service.dart';
 import 'package:musicapp/data/models/music_model.dart';
@@ -18,7 +19,7 @@ class MusicRepo {
               ["thumbnails"]
           .map((i) => i["url"].toString()));
       sec = double.tryParse(data["videoDetails"]["lengthSeconds"].toString())!;
-      debugPrint("Music total Sec : $sec");
+      log("Music total Sec : $sec");
       model.seceunds = sec;
       model.isDetailed = true;
       if (model.isInBox) model.save();

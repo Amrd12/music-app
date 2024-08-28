@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:meta/meta.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/repo/lyrics_repo.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
@@ -53,7 +53,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
       if (state == ProcessingState.completed) {
         await playNext();
         emit(PlayerMiniLoad(index, playList));
-        print("===============================playnext======================");
+        log("===============================playnext======================");
       }
       if (state == ProcessingState.ready) {
         emit(PlayerMiniLoad(index, playList));

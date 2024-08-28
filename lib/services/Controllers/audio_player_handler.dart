@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
-import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/repo/lyrics_repo.dart';
@@ -95,7 +96,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
         try {
           model = await _musicRepo.getMusicData(model);
         } catch (e) {
-          print('Error fetching music data: $e');
+          log('Error fetching music data: $e');
           return;
         }
       }
@@ -111,10 +112,10 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
         await audioPlayer.seek(Duration.zero, index: currentIndex);
         await play();
       } catch (e) {
-        print('Error skipping to queue item: $e');
+        log('Error skipping to queue item: $e');
       }
     } else {
-      print('Invalid index: $index');
+      log('Invalid index: $index');
     }
   }
 
