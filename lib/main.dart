@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:musicapp/constans/themedata.dart';
 import 'package:musicapp/locator.dart';
+import 'package:musicapp/ui/screens/album_screen/cubit/album_cubit.dart';
+import 'package:musicapp/ui/screens/artist_screen/cubit/artist_cubit.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:musicapp/ui/screens/layout_screen/view/layout_screen.dart';
 import 'package:musicapp/ui/screens/platlist_screen/cubit/playlist_cubit.dart';
@@ -47,6 +49,12 @@ class MainApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => PlaylistCubit(),
+          ),
+          BlocProvider(
+            create: (context) => AlbumCubit(),
+          ),
+          BlocProvider(
+            create: (context) => ArtistCubit(),
           ),
         ],
         child: MaterialApp(

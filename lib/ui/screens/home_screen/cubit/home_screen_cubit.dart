@@ -2,6 +2,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:musicapp/constans/api_constants.dart';
 import 'package:musicapp/data/api/api_service.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/data/repo/playlist_repo.dart';
@@ -37,9 +38,11 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
     List<PlaylistModel>? summer_2024 =
         _parsePlayList(js["results"]["summer_2024_☀️🌴🍉"]);
+    List<PlaylistModel>? enjoyingTheMorning =
+        _parsePlayList(js["results"]["enjoying_the_morning"]);
 
-    emit(HomeScreenSuccess(
-        musicList, boostYourMood, summer_2024, afterWorkFeeling));
+    emit(HomeScreenSuccess(musicList, boostYourMood, summer_2024,
+        afterWorkFeeling, enjoyingTheMorning));
   }
 
   List<PlaylistModel>? _parsePlayList(List<dynamic>? js) {
@@ -49,8 +52,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
     playlistMoods.map((e) => e["id"] = e.remove("browseId")).toList();
 
-    List<PlaylistModel> boostYourMood = List<PlaylistModel>.from(
-        _playlistRepo.parsePlaylistModel(playlistMoods));
+    List<PlaylistModel> boostYourMood =
+        List<PlaylistModel>.from(_playlistRepo.parsePlaylistModel(playlistMoods));
     return boostYourMood;
   }
 }

@@ -35,10 +35,7 @@ class CustomBottomSheet extends StatelessWidget {
               topRight: Radius.circular(50),
             ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: screen(context, s),
-          ),
+          child: screen(context, s),
         );
       },
     );

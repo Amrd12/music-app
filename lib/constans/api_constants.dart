@@ -7,7 +7,8 @@ class ApiConstantsRequest {
 
   static const String next = "next";
   static const String playlistInfo = "getPlaylist";
-  // static const String messagesAdvice = "messages_advice.php";
+  static const String artistInfo = "getArtists";
+  static const String albumtInfo = "getAlbum";
 }
 
 class ApiConstantsResponse {

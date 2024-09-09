@@ -7,6 +7,7 @@ part 'playlist_state.dart';
 class PlaylistCubit extends Cubit<PlaylistState> {
   PlaylistCubit() : super(PlaylistInitial());
   final PlaylistRepo _playlistRepo = locator.get<PlaylistRepo>();
+  
   Future<void> getPlaylistInfo(PlaylistModel model) async {
     emit(PlaylistLoad());
     model = await _playlistRepo.getPlaylistData(model);

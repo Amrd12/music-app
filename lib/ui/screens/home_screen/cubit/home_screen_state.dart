@@ -11,9 +11,10 @@ final class HomeScreenSuccess extends HomeScreenState {
   final List<PlaylistModel>? boostYourMood;
   final List<PlaylistModel>? summer_2024;
   final List<PlaylistModel>? afterWorkFeeling;
+  final List<PlaylistModel>? enjoyingTheMorning;
 
   HomeScreenSuccess(this.quickPicks, this.boostYourMood, this.summer_2024,
-      this.afterWorkFeeling);
+      this.afterWorkFeeling, this.enjoyingTheMorning);
 }
 
 final class HomeScreenError extends HomeScreenState {
