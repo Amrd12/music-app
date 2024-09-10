@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musicapp/data/models/artist_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
@@ -37,11 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 List<PlaylistModel>? boostyourMood = state.boostYourMood;
                 List<PlaylistModel>? summer = state.summer_2024;
                 List<PlaylistModel>? afterWorkFeeling = state.afterWorkFeeling;
-
+                List<ArtistModel>? artistList = state.topArtist;
                 return Column(
                   children: [
                     const HomeBodyAppBar(),
-                    const ArtistList(),
+                    if (artistList != null) ArtistList(artstisList: artistList),
                     if (modelList != null)
                       MusicWidgetList(modelList: modelList),
                     if (boostyourMood != null)

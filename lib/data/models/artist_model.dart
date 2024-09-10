@@ -91,26 +91,37 @@ class ArtistModel extends HiveObject {
   // fromMap method
   factory ArtistModel.fromMap(Map<String, dynamic> map) {
     return ArtistModel(
-      channelId: map['channelId'],
-      title: map['title'],
-      thumbnail: map['thumbnail'],
-      subscriberText: map['subscriberText'],
-      description: map['description'],
-      songs: List<MusicModel>.from(
-          map['songs']?.map((x) => MusicModel.fromMap(x))),
-      albums: List<AlbumModel>.from(
-          map['albums']?.map((x) => AlbumModel.fromMap(x))),
-      singles: List<AlbumModel>.from(
-          map['singles']?.map((x) => AlbumModel.fromMap(x))),
-      musics: List<MusicModel>.from(
-          map['musics']?.map((x) => MusicModel.fromMap(x))),
-      playlist: List<AlbumModel>.from(
-          map['playlist']?.map((x) => AlbumModel.fromMap(x))),
-      artist: List<ArtistModel>.from(
-          map['artist']?.map((x) => ArtistModel.fromMap(x))),
+      channelId: map['channelId'] ?? '',
+      title: map['title'] ?? '',
+      thumbnail: map['thumbnail'] ?? '',
+      subscriberText: map['subscriberText'] ?? '',
+      description: map['description'] ?? '',
+      songs: (map['songs'] != null
+          ? List<MusicModel>.from(
+              map['songs'].map((x) => MusicModel.fromMap(x)))
+          : []),
+      albums: (map['albums'] != null
+          ? List<AlbumModel>.from(
+              map['albums'].map((x) => AlbumModel.fromMap(x)))
+          : []),
+      singles: (map['singles'] != null
+          ? List<AlbumModel>.from(
+              map['singles'].map((x) => AlbumModel.fromMap(x)))
+          : []),
+      musics: (map['musics'] != null
+          ? List<MusicModel>.from(
+              map['musics'].map((x) => MusicModel.fromMap(x)))
+          : []),
+      playlist: (map['playlist'] != null
+          ? List<AlbumModel>.from(
+              map['playlist'].map((x) => AlbumModel.fromMap(x)))
+          : []),
+      artist: (map['artist'] != null
+          ? List<ArtistModel>.from(
+              map['artist'].map((x) => ArtistModel.fromMap(x)))
+          : []),
     );
   }
-
   // toJson method
   Map<String, dynamic> toJson() => toMap();
 

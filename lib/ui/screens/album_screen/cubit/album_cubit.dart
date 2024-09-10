@@ -11,8 +11,7 @@ class AlbumCubit extends Cubit<AlbumState> {
 
   Future<void> getPlaylistInfo(AlbumModel model) async {
     emit(AlbumLoad());
-    model = await _albumRepo.getArtistData(model);
+    model = await _albumRepo.getAlbumData(model);
     emit(AlbumSuccess(model));
   }
-
 }
