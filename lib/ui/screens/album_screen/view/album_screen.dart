@@ -4,22 +4,20 @@ import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/ui/screens/album_screen/cubit/album_cubit.dart';
 import 'package:musicapp/ui/screens/album_screen/widgets/album_body.dart';
 
-
-class PlaylistScreen extends StatefulWidget {
-  const PlaylistScreen({super.key, required this.playlistModel});
-  final AlbumModel playlistModel;
+class AlbumScreen extends StatefulWidget {
+  const AlbumScreen({super.key, required this.model});
+  final AlbumModel model;
 
   @override
-  State<PlaylistScreen> createState() => _PlaylistScreenState();
+  State<AlbumScreen> createState() => _AlbumScreenState();
 }
 
-class _PlaylistScreenState extends State<PlaylistScreen> {
-  late AlbumModel model = widget.playlistModel;
+class _AlbumScreenState extends State<AlbumScreen> {
+  late AlbumModel model = widget.model;
 
   @override
   void initState() {
-    BlocProvider.of<AlbumCubit>(context)
-        .getPlaylistInfo(widget.playlistModel);
+    BlocProvider.of<AlbumCubit>(context).getPlaylistInfo(widget.model);
     super.initState();
   }
 

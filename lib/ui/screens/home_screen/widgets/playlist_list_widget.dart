@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
-import 'package:musicapp/ui/screens/home_screen/widgets/recommend_widget.dart';
+import 'package:musicapp/ui/screens/home_screen/widgets/playlist_widget.dart';
 
 import '../../../../constans/text_style_manager.dart';
 
-class RecommedList extends StatelessWidget {
-  const RecommedList({super.key, required this.title, required this.playlist});
+class PlaylistListWidget extends StatelessWidget {
+  const PlaylistListWidget(
+      {super.key, required this.title, required this.playlist});
   final List<PlaylistModel> playlist;
   final String title;
   @override
@@ -22,7 +23,7 @@ class RecommedList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: playlist.length,
               itemBuilder: (context, index) {
-                return RecommendWidget(model: playlist[index]);
+                return PlaylistWidget(model: playlist[index]);
               },
             ),
           )

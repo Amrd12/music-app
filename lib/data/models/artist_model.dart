@@ -15,15 +15,15 @@ class ArtistModel extends HiveObject {
   @HiveField(4)
   String description;
   @HiveField(5)
-  List<MusicModel> songs;
+  List<MusicModel> songs; // k
   @HiveField(6)
-  List<AlbumModel> albums;
+  List<AlbumModel> albums; //k
   @HiveField(7)
-  List<AlbumModel> singles;
+  List<AlbumModel> singles; // k
   @HiveField(8)
-  List<MusicModel> musics;
+  List<MusicModel> musics; //k
   @HiveField(9)
-  List<AlbumModel> playlist;
+  List<AlbumModel> playlist; //k
   @HiveField(10)
   List<ArtistModel> artist;
 

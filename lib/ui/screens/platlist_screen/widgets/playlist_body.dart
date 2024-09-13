@@ -7,6 +7,7 @@ import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_item_full.d
 import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_item_mini.dart';
 import 'package:musicapp/ui/screens/platlist_screen/widgets/playlist_list.dart';
 
+
 class PlaylistBody extends StatefulWidget {
   const PlaylistBody({super.key, required this.model});
   final PlaylistModel model;

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/artist_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
+import 'package:musicapp/ui/screens/home_screen/widgets/album_list_widget.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/artist_list.dart';
 import 'package:musicapp/ui/screens/home_screen/widgets/music_widget_list.dart';
-import 'package:musicapp/ui/screens/home_screen/widgets/recommed_list.dart';
+import 'package:musicapp/ui/screens/home_screen/widgets/playlist_list_widget.dart';
 
 import '../widgets/home_body_app_bar.dart';
 
@@ -39,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 List<PlaylistModel>? summer = state.summer_2024;
                 List<PlaylistModel>? afterWorkFeeling = state.afterWorkFeeling;
                 List<ArtistModel>? artistList = state.topArtist;
+                List<AlbumModel>? newReleaseAlbums = state.newReleaseAlbums;
                 return Column(
                   children: [
                     const HomeBodyAppBar(),
@@ -46,15 +49,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (modelList != null)
                       MusicWidgetList(modelList: modelList),
                     if (boostyourMood != null)
-                      RecommedList(
+                      PlaylistListWidget(
                           title: "Boost Your Mind", playlist: boostyourMood),
                     if (summer != null)
-                      RecommedList(
+                      PlaylistListWidget(
                           title: "summer_2024_☀️🌴🍉", playlist: summer),
                     if (afterWorkFeeling != null)
-                      RecommedList(
+                      PlaylistListWidget(
                           title: "After Work Feeling",
-                          playlist: afterWorkFeeling)
+                          playlist: afterWorkFeeling),
+                    if (newReleaseAlbums != null)
+                      AlbumListWidget(
+                        title: "New Realse Album",
+                        albumList: newReleaseAlbums,
+                      ),
                   ],
                 );
               } else {

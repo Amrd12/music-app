@@ -17,6 +17,7 @@ class PlayerWidget extends StatelessWidget {
   final bool showPhoto;
   @override
   Widget build(BuildContext context) {
+    model.seceunds ??= 0;
     return Card(
       color: bgColor.withOpacity(.5),
       child: Container(

@@ -31,11 +31,14 @@ class CustomBottomSheet extends StatelessWidget {
           decoration: BoxDecoration(
             color: bgcolor,
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
             ),
           ),
-          child: screen(context, s),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: screen(context, s),
+          ),
         );
       },
     );

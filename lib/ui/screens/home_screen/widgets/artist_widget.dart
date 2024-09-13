@@ -14,7 +14,7 @@ class ArtistWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (_) =>
-              CustomPushScreen(screen: ArtistScreen(playlistModel: model)))),
+              CustomPushScreen(screen: ArtistScreen(model: model)))),
       child: SizedBox(
         width: 100, // Set a fixed width
         height: 100, // Set a fixed height

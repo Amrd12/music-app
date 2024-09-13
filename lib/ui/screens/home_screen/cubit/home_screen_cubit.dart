@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:musicapp/constans/api_constants.dart';
@@ -74,17 +73,17 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     emit(success);
   }
 
-  List<MusicModel>? _parseMusic(dynamic l) {
-    if (l == null) return null;
-    List<Map<String, dynamic>> playlistMoods =
-        List<Map<String, dynamic>>.from(l);
+  // List<MusicModel>? _parseMusic(dynamic l) {
+  //   if (l == null) return null;
+  //   List<Map<String, dynamic>> playlistMoods =
+  //       List<Map<String, dynamic>>.from(l);
 
-    // playlistMoods.map((e) => e["id"] = e.remove("browseId")).toList();
+  //   // playlistMoods.map((e) => e["id"] = e.remove("browseId")).toList();
 
-    List<MusicModel> boostYourMood =
-        List<MusicModel>.from(_musicRepo.parseMusicModel(playlistMoods));
-    return boostYourMood;
-  }
+  //   List<MusicModel> boostYourMood =
+  //       List<MusicModel>.from(_musicRepo.parseMusicModel(playlistMoods));
+  //   return boostYourMood;
+  // }
 
   List<PlaylistModel>? _parsePlayList(List<dynamic>? js) {
     if (js == null) return null;

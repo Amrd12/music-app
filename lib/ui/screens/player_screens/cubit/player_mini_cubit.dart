@@ -65,7 +65,7 @@ class PlayerMiniCubit extends Cubit<PlayerMiniState> {
     if (!model.isDetailed ||
         model.formates == null ||
         model.formates!.isEmpty) {
-      return await _musicRepo.getMusicData(model);
+      model = await _musicRepo.getMusicData(model);
     }
     model.lyrics ??= await _lyricsRepo.getLyric(model.id);
     return model;

@@ -7,10 +7,10 @@ import 'package:musicapp/ui/screens/platlist_screen/view/playlist_screen.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 import '../../../../constans/text_style_manager.dart';
 
-class RecommendWidget extends StatelessWidget {
-  const RecommendWidget({super.key, required this.model});
+class PlaylistWidget extends StatelessWidget {
+  const PlaylistWidget({super.key, required this.model, this.showText = false});
   final PlaylistModel model;
-
+  final bool showText;
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: AlignmentDirectional.bottomEnd, children: [
@@ -19,6 +19,7 @@ class RecommendWidget extends StatelessWidget {
             builder: (_) => CustomPushScreen(
                 screen: PlaylistScreen(playlistModel: model)))),
         child: Container(
+          width: 200,
           margin: const EdgeInsets.only(bottom: 25, right: 25),
           padding: const EdgeInsets.all(30),
           decoration: BoxDecoration(
@@ -27,10 +28,12 @@ class RecommendWidget extends StatelessWidget {
                   image: CachedNetworkImageProvider(model.thumbnail),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(35)),
-          child: Text(
-            model.title,
-            style: TextStyleManger.secTextLexend,
-          ),
+          child: showText == true
+              ? Text(
+                  model.title,
+                  style: TextStyleManger.secTextLexend,
+                )
+              : null,
         ),
       ),
       IconButton(

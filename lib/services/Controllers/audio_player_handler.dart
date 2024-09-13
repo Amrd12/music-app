@@ -34,6 +34,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     await audioPlayer
         .setAudioSource(ConcatenatingAudioSource(children: audioSources));
     audioPlayer.playbackEventStream.listen(_broadcastState);
+
     queue.add(songs);
 
     await skipToQueueItem(index);
@@ -95,6 +96,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
           model.formates!.isEmpty) {
         try {
           model = await _musicRepo.getMusicData(model);
+          model.lyrics ??= await _lyricsRepo.getLyric(model.id);
         } catch (e) {
           log('Error fetching music data: $e');
           return;

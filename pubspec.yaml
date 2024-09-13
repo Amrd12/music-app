@@ -23,6 +23,10 @@ dependencies:
   just_audio: ^0.9.37
   modal_bottom_sheet: ^3.0.0
   permission_handler: ^11.3.1
+  modaldragablescrollablesheet:
+    git:
+        url: https://github.com/Amrd12/modaldragablescrollablesheet
+  scrollable_positioned_list: ^0.3.8
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:

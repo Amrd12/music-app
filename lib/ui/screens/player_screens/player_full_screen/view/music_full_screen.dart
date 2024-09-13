@@ -53,7 +53,7 @@ class _MusicFullScreenState extends State<MusicFullScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (height < 0.65) PlayerPhotoFull(model: model),
+                      if (height < 0.65) PlayerPhotoFull(model: model),
                         if (height >= 0.65) const SizedBox(height: 25),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 0.0),

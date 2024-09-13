@@ -1,6 +1,5 @@
 import 'package:musicapp/data/api/playlist_api_service.dart';
 import 'package:musicapp/data/models/music_model.dart';
-import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
 import 'package:musicapp/locator.dart';
 
