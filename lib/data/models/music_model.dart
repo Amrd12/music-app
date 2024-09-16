@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/lyric_model.dart';
 
-// part 'info_music_model.g.dart';
+part 'music_model.g.dart';
 
 @HiveType(typeId: 0)
 class MusicModel extends HiveObject {

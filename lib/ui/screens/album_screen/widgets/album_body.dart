@@ -41,6 +41,7 @@ class _AlbumBodyState extends State<AlbumBody> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
+          
           Column(
             children: [
               if (height < .61)
@@ -52,6 +53,7 @@ class _AlbumBodyState extends State<AlbumBody> {
                 ),
             ],
           ),
+
           CustomBottomSheet(
             scrollController: scrollController,
             maxSize: .8,

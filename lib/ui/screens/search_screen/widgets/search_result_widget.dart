@@ -17,8 +17,10 @@ class SearchResultWidget extends StatefulWidget {
 }
 
 class _SearchResultWidgetState extends State<SearchResultWidget> {
+  Widget screen = const Center(
+    child: Text("Error no Screen"),
+  );
 
-  late Widget screen;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +28,7 @@ class _SearchResultWidgetState extends State<SearchResultWidget> {
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) {
             if (state is SearchLoading) {
-              return const Center(child: CircularProgressIndicator());
+              screen = const Center(child: CircularProgressIndicator());
             }
             if (state is MusicResult) {
               screen = MusicList(modelList: state.musicList);

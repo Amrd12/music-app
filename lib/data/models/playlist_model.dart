@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/music_model.dart';
+part 'playlist_model.g.dart';
 
 @HiveType(typeId: 2)
 class PlaylistModel extends HiveObject {

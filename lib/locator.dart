@@ -12,26 +12,40 @@ import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/data/repo/playlist_repo.dart';
 import 'package:musicapp/data/repo/search_repo.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
+import 'package:musicapp/services/database/hive_album.dart';
+import 'package:musicapp/services/database/hive_artist.dart';
 import 'package:musicapp/services/database/hive_music.dart';
+import 'package:musicapp/services/database/hive_playlist.dart';
 import 'package:musicapp/services/database/hive_search.dart';
+import 'package:musicapp/services/database/hive_user.dart';
 
 final locator = GetIt.instance;
 
 void setup() {
+  //api
   locator.registerFactory<MusicApiService>(() => MusicApiService());
-  locator.registerFactory<MusicRepo>(() => MusicRepo());
   locator.registerFactory<LyricsApiService>(() => LyricsApiService());
-  locator.registerFactory<LyricsRepo>(() => LyricsRepo());
   locator.registerFactory<PlaylistApiService>(() => PlaylistApiService());
   locator.registerFactory<AlbumApiService>(() => AlbumApiService());
   locator.registerFactory<ArtistApiService>(() => ArtistApiService());
   locator.registerFactory<SearchApiService>(() => SearchApiService());
+
+  //repo
+  locator.registerFactory<MusicRepo>(() => MusicRepo());
+  locator.registerFactory<LyricsRepo>(() => LyricsRepo());
   locator.registerFactory<SearchRepo>(() => SearchRepo());
-  locator.registerFactory<HiveSearch>(() => HiveSearch());
   locator.registerFactory<PlaylistRepo>(() => PlaylistRepo());
   locator.registerFactory<AlbumRepo>(() => AlbumRepo());
   locator.registerFactory<ArtistRepo>(() => ArtistRepo());
 
+  //hive
   locator.registerFactory<HiveMusic>(() => HiveMusic());
+  locator.registerFactory<HiveSearch>(() => HiveSearch());
+  locator.registerFactory<HiveArtist>(() => HiveArtist());
+  locator.registerFactory<HiveAlbum>(() => HiveAlbum());
+  locator.registerFactory<HivePlaylist>(() => HivePlaylist());
+  locator.registerLazySingleton<HiveUser>(() => HiveUser());
+
+  //service
   locator.registerLazySingleton<AudioPlayerHandler>(() => AudioPlayerHandler());
 }

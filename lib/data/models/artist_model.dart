@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
+part 'artist_model.g.dart';
 
 @HiveType(typeId: 3)
 class ArtistModel extends HiveObject {

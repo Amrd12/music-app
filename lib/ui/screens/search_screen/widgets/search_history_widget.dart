@@ -17,6 +17,7 @@ class SearchHistoryWidget extends StatefulWidget {
 class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
   List<SearchModel> history = [];
   ModelType? selectedType;
+
   @override
   void initState() {
     _filterOnPress();
@@ -73,10 +74,11 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                   }
                 },
                 child: ListView.separated(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(0),
                   itemBuilder: (context, index) {
                     final modelIndex = history[index];
                     return ListTile(
+                      contentPadding: const EdgeInsets.only(left: 10),
                       onTap: () => BlocProvider.of<SearchCubit>(context)
                           .setItem(modelIndex),
                       leading: SvgPicture.asset(
@@ -90,10 +92,16 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                             .copyWith(fontSize: 25, color: MyColors.myOrange),
                       ),
                       subtitle: Text(
-                        modelIndex.type,
-                        style: TextStyleManger.mainTextLexend
-                            .copyWith(fontSize: 18),
+                        modelIndex.date,
+                        style: TextStyleManger.mainTextLexend.copyWith(
+                          fontSize: 15,
+                          color: MyColors.myWhite,
+                        ),
                       ),
+                      trailing: IconButton(
+                          onPressed: () => BlocProvider.of<SearchCubit>(context)
+                              .deleteModel(modelIndex),
+                          icon: const Icon(Icons.delete)),
                     );
                   },
                   separatorBuilder: (context, index) =>

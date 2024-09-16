@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/artist_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
@@ -7,6 +10,7 @@ import 'package:musicapp/data/models/search_model.dart';
 import 'package:musicapp/data/repo/search_repo.dart';
 import 'package:musicapp/enums/model_type.dart';
 import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_search.dart';
 
 part 'search_state.dart';
 
@@ -14,12 +18,17 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(SearchInitial());
 
   final SearchRepo _searchRepo = locator.get<SearchRepo>();
-  // final HiveSearch _hiveSearch = locator.get<HiveSearch>();
-
+  final HiveSearch _hiveSearch = locator.get<HiveSearch>();
   late SearchResult result;
   late SearchLocal local;
 
   Future<void> search(SearchModel model) async {
+    model = model.copyWith(
+      date: DateFormat('EEE, M/d/y').format(DateTime.now()).toString(),
+    );
+    _hiveSearch.box.add(model);
+    model.save();
+    loadLocal();
     try {
       emit(SearchLoading()); // Loading state
       switch (model.type.toModelType()) {
@@ -51,15 +60,14 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void loadLocal() {
-    // final local = SearchLocal(_hiveSearch.getAllSaved());
-    local = SearchLocal([
-      SearchModel(querry: "riell", type: ModelType.music.toString()),
-      SearchModel(querry: "riell", type: ModelType.playlist.toString()),
-      SearchModel(querry: "riell", type: ModelType.album.toString()),
-      SearchModel(querry: "riell", type: ModelType.artist.toString()),
-    ]);
-
+    List<SearchModel> res = _hiveSearch.getAllSaved().reversed.toList();
+    local = SearchLocal(res);
     emit(local);
+  }
+
+  void deleteModel(SearchModel model) {
+    model.delete();
+    loadLocal();
   }
 
   void filterSearch({ModelType? type}) {

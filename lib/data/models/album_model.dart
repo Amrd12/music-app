@@ -4,6 +4,8 @@ import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/music_model.dart';
 
+part 'album_model.g.dart';
+
 @HiveType(typeId: 4)
 class AlbumModel extends HiveObject {
   @HiveField(0)

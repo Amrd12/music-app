@@ -4,5 +4,5 @@ import 'package:musicapp/services/database/hive_manager.dart';
 
 class HiveSearch extends HiveManager<SearchModel> {
   @override
-  String get boxName => HiveConstants.musicBox;
+  String get boxName => HiveConstants.searchBox;
 }

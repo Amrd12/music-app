@@ -2,10 +2,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:musicapp/constans/colors.dart';
+import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/search_model.dart';
 import 'package:musicapp/enums/model_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musicapp/ui/main_widgets/custom_push_screen.dart';
 import 'package:musicapp/ui/screens/search_screen/cubit/search_cubit.dart';
 import 'package:musicapp/ui/screens/search_screen/widgets/search_history_widget.dart';
 import 'package:musicapp/ui/screens/search_screen/widgets/search_result_Widget.dart';
@@ -28,9 +28,14 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     _controller = TextEditingController();
-    currentItem = SearchModel(querry: "", type: ModelType.music.toString());
+
+    currentItem =
+        SearchModel(querry: "", type: ModelType.music.toString(), date: "");
+
     showHistory = ValueNotifier<bool>(true);
+
     BlocProvider.of<SearchCubit>(context).loadLocal();
+    
     super.initState();
   }
 
@@ -58,6 +63,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 _controller.text = currentItem.querry;
 
                 return TextField(
+                  style: TextStyleManger.mainTextLexend.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      wordSpacing: 10),
                   onSubmitted: (value) => _search(),
                   textInputAction: TextInputAction.search,
                   onChanged: (value) =>
@@ -82,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           )
                         ],
                       ),
-                      labelText: "Querry",
+                      labelText: "Search",
                       border: const OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(8.0)))),

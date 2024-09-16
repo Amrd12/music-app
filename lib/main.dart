@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:musicapp/constans/themedata.dart';
 import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_manager.dart';
 import 'package:musicapp/ui/screens/album_screen/cubit/album_cubit.dart';
 import 'package:musicapp/ui/screens/artist_screen/cubit/artist_cubit.dart';
 import 'package:musicapp/ui/screens/home_screen/cubit/home_screen_cubit.dart';
@@ -13,8 +14,11 @@ import 'package:flutter/services.dart';
 import 'package:musicapp/ui/screens/search_screen/cubit/search_cubit.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: "data.env");
   setup();
+  await setupHive();
   // AudioPlayerHandler _audioHandler = locator.get<AudioPlayerHandler>();
 
   // _audioHandler = await AudioService.init(
