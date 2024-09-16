@@ -32,7 +32,7 @@ class ArtistList extends StatelessWidget {
             maxLines: 1, // Ensures the title is only one line
             overflow: TextOverflow.ellipsis, // Adds ellipsis if overflow
             style: TextStyleManger.mainTextNico
-                .copyWith(fontSize: 18, color: MyColors.myBlack),
+                .copyWith(fontSize: 18, color: MyColors.myOrange),
           ),
           minLeadingWidth: 20,
           subtitle: Text(
@@ -41,7 +41,8 @@ class ArtistList extends StatelessWidget {
             overflow: TextOverflow.ellipsis, // Adds ellipsis if overflow
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.start,
-            style: TextStyleManger.secTextLexendWhite.copyWith(fontSize: 15),
+            style: TextStyleManger.secTextLexendWhite
+                .copyWith(fontSize: 15, color: MyColors.myWhite),
           ),
           trailing:
               IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),

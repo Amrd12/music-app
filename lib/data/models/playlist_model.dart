@@ -14,7 +14,7 @@ class PlaylistModel extends HiveObject {
   @HiveField(2)
   final String thumbnail;
   @HiveField(3)
-  final String subtitle;
+  String? subtitle;
   @HiveField(4)
   String? playlistAuthor;
   @HiveField(5)
@@ -30,7 +30,7 @@ class PlaylistModel extends HiveObject {
     required this.id,
     required this.title,
     required this.thumbnail,
-    required this.subtitle,
+    this.subtitle,
     this.playlistAuthor,
     this.playlistTotalSong,
     this.playlistTotalDuration,
@@ -53,11 +53,19 @@ class PlaylistModel extends HiveObject {
   }
 
   factory PlaylistModel.fromMap(Map<String, dynamic> map) {
+    if (map.containsKey("playlistId")) {
+      map["id"] = map["playlistId"];
+      map.remove("playlistId");
+    }
+    if (map.containsKey("author")) {
+      map["playlistAuthor"] = map["author"];
+      map.remove("author");
+    }
     return PlaylistModel(
       id: map['id'] as String,
       title: map['title'] as String,
       thumbnail: map['thumbnail'] as String,
-      subtitle: map['subtitle'] as String,
+      subtitle: map['subtitle'] != null ? map['subtitle'] as String : null,
       playlistAuthor: map['playlistAuthor'] != null
           ? map['playlistAuthor'] as String
           : null,

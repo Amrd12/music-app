@@ -18,7 +18,7 @@ class PlaylistItemMini extends StatelessWidget {
               .copyWith(color: MyColors.myOrange, fontSize: 20),
         ),
         subtitle: Text(
-          model.playlistAuthor ?? model.subtitle,
+          model.playlistAuthor ?? model.subtitle!,
           style: TextStyleManger.secTextLexend.copyWith(fontSize: 15),
         ),
         trailing:

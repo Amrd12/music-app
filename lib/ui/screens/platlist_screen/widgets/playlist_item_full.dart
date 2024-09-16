@@ -31,6 +31,7 @@ class _PlaylistItemFullState extends State<PlaylistItemFull> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(widget.model.title,
+                  textAlign: TextAlign.center,
                   style: TextStyleManger.mainTextLexend
                       .copyWith(color: MyColors.myOrange, fontSize: 20)),
               Text(widget.model.playlistAuthor ?? "",

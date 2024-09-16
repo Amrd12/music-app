@@ -52,6 +52,18 @@ class AlbumModel extends HiveObject {
   }
 
   factory AlbumModel.fromMap(Map<String, dynamic> map) {
+    if (map.containsKey("albumId")) {
+      map["browseId"] = map["albumId"];
+      map.remove("albumId");
+    }
+    if (map.containsKey("author")) {
+      map["albumAuthor"] = map["author"];
+      map.remove("author");
+    }
+    if (map.containsKey("releaseDate")) {
+      map["subtitle"] = map["releaseDate"];
+      map.remove("releaseDate");
+    }
     return AlbumModel(
       id: map['browseId'] as String,
       title: map['title'] as String,

@@ -90,6 +90,10 @@ class ArtistModel extends HiveObject {
 
   // fromMap method
   factory ArtistModel.fromMap(Map<String, dynamic> map) {
+    if (map.containsKey("browseId")) {
+      map["channelId"] = map["browseId"];
+      map.remove("browseId");
+    }
     return ArtistModel(
       channelId: map['channelId'] ?? '',
       title: map['title'] ?? '',

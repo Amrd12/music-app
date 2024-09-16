@@ -33,7 +33,7 @@ class MusicList extends StatelessWidget {
             maxLines: 1, // Ensures the title is only one line
             overflow: TextOverflow.ellipsis, // Adds ellipsis if overflow
             style: TextStyleManger.mainTextNico
-                .copyWith(fontSize: 18, color: MyColors.myBlack),
+                .copyWith(fontSize: 18, color: MyColors.myOrange),
           ),
           minLeadingWidth: 20,
           subtitle: Text(

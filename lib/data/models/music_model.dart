@@ -25,7 +25,7 @@ class MusicModel extends HiveObject {
   bool isDetailed = false;
 
   @HiveField(5)
-  final String? channelId;
+  String? channelId;
 
   @HiveField(6)
   double startFrom = 0;

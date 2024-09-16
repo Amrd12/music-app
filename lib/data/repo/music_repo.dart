@@ -15,6 +15,7 @@ class MusicRepo {
     final data = await _musicApiService.getMusicMapData(model.id);
     double? sec;
     if (!model.isDetailed) {
+      model.channelId = data["videoDetails"]["channelId"];
       model.thumbnail = List<String>.from(data["videoDetails"]["thumbnail"]
               ["thumbnails"]
           .map((i) => i["url"].toString()));
@@ -33,6 +34,7 @@ class MusicRepo {
         });
       }
     }
+
     return model;
   }
 

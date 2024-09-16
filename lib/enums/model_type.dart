@@ -1,35 +1,35 @@
-import 'package:flutter/material.dart';
+import 'package:musicapp/constans/icons_svg.dart';
 
 enum ModelType {
   music,
   playlist,
-  author,
+  artist,
   album;
 
   @override
   String toString() {
     switch (this) {
       case ModelType.music:
-        return "video";
+        return "song";
       case ModelType.playlist:
-        return "playlist";
-      case ModelType.author:
-        return "author";
+        return "community_playlists";
+      case ModelType.artist:
+        return "artists";
       case ModelType.album:
-        return "album";
+        return "albums";
     }
   }
 
-  IconData icon() {
+  String icon() {
     switch (this) {
       case ModelType.music:
-        return Icons.music_note;
+        return IconsSvg.music;
       case ModelType.playlist:
-        return Icons.playlist_add_rounded;
-      case ModelType.author:
-        return Icons.person;
+        return IconsSvg.playlist;
+      case ModelType.artist:
+        return IconsSvg.author;
       case ModelType.album:
-        return Icons.album;
+        return IconsSvg.album;
     }
   }
 }
@@ -37,13 +37,13 @@ enum ModelType {
 extension ToModelType on String {
   ModelType? toModelType() {
     switch (this) {
-      case "music":
+      case "song":
         return ModelType.music;
-      case "playlist":
+      case "community_playlists":
         return ModelType.playlist;
-      case "author":
-        return ModelType.author;
-      case "album":
+      case "artists":
+        return ModelType.artist;
+      case "albums":
         return ModelType.album;
       default:
         return null;

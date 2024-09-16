@@ -7,8 +7,11 @@ import 'package:musicapp/locator.dart';
 class ArtistRepo {
   final ArtistApiService _apiService = locator.get<ArtistApiService>();
 
-  List<ArtistModel> parseArtistModel(List<Map<String, dynamic>> map) =>
-      List<ArtistModel>.from(map.map((i) => ArtistModel.fromMap(i))).toList();
+  List<ArtistModel> parseArtistModel(List<Map<String, dynamic>> map) {
+
+    return List<ArtistModel>.from(map.map((i) => ArtistModel.fromMap(i)))
+        .toList();
+  }
 
   Future<ArtistModel> getArtistData(ArtistModel artist) async {
     final js = await _apiService.getPlaylistData(artist.channelId);

@@ -10,6 +10,7 @@ import 'package:musicapp/ui/screens/layout_screen/view/layout_screen.dart';
 import 'package:musicapp/ui/screens/platlist_screen/cubit/playlist_cubit.dart';
 import 'package:musicapp/ui/screens/player_screens/cubit/player_mini_cubit.dart';
 import 'package:flutter/services.dart';
+import 'package:musicapp/ui/screens/search_screen/cubit/search_cubit.dart';
 
 void main() async {
   await dotenv.load(fileName: "data.env");
@@ -55,6 +56,9 @@ class MainApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ArtistCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SearchCubit(),
           ),
         ],
         child: MaterialApp(

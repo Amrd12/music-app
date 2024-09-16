@@ -17,15 +17,17 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_dotenv: ^5.1.0
   flutter_lazy_indexed_stack: ^0.0.6
+  flutter_svg: ^2.0.10+1
+  font_awesome_flutter: ^10.7.0
   get_it: ^7.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   just_audio: ^0.9.37
   modal_bottom_sheet: ^3.0.0
-  permission_handler: ^11.3.1
   modaldragablescrollablesheet:
     git:
-        url: https://github.com/Amrd12/modaldragablescrollablesheet
+      url: https://github.com/Amrd12/modaldragablescrollablesheet
+  permission_handler: ^11.3.1
   scrollable_positioned_list: ^0.3.8
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -44,3 +46,4 @@ flutter:
         - asset: assets/fonts/LexendExa-VariableFont_wght.ttf
   assets:
     - data.env
+    - assets/icons/

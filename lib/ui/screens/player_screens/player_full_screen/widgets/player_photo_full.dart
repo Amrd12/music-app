@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:musicapp/data/models/artist_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/ui/main_widgets/custom_push_screen.dart';
+import 'package:musicapp/ui/screens/artist_screen/view/artist_screen.dart';
 
 class PlayerPhotoFull extends StatelessWidget {
   const PlayerPhotoFull({
@@ -8,20 +11,31 @@ class PlayerPhotoFull extends StatelessWidget {
     required this.model,
   });
 
-  final MusicModel? model;
+  final MusicModel model;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: ClipPath(
-          clipBehavior: Clip.hardEdge,
-          clipper: _CustomClipperExample(),
-          child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: model!.thumbnail.last,
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => CustomPushScreen(
+                    screen: ArtistScreen(
+                  model: ArtistModel(
+                      channelId: model.channelId!,
+                      title: model.author,
+                      thumbnail: '',
+                      subscriberText: ''),
+                )))),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: ClipPath(
+            clipBehavior: Clip.hardEdge,
+            clipper: _CustomClipperExample(),
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: model.thumbnail.last,
+            ),
           ),
         ),
       ),

@@ -4,13 +4,16 @@ import 'package:musicapp/data/api/artist_api_service.dart';
 import 'package:musicapp/data/api/lyrics_api_service.dart';
 import 'package:musicapp/data/api/music_api_service.dart';
 import 'package:musicapp/data/api/playlist_api_service.dart';
+import 'package:musicapp/data/api/search_api_service.dart';
 import 'package:musicapp/data/repo/album_repo.dart';
 import 'package:musicapp/data/repo/artist_repo.dart';
 import 'package:musicapp/data/repo/lyrics_repo.dart';
 import 'package:musicapp/data/repo/music_repo.dart';
 import 'package:musicapp/data/repo/playlist_repo.dart';
+import 'package:musicapp/data/repo/search_repo.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/services/database/hive_music.dart';
+import 'package:musicapp/services/database/hive_search.dart';
 
 final locator = GetIt.instance;
 
@@ -22,7 +25,9 @@ void setup() {
   locator.registerFactory<PlaylistApiService>(() => PlaylistApiService());
   locator.registerFactory<AlbumApiService>(() => AlbumApiService());
   locator.registerFactory<ArtistApiService>(() => ArtistApiService());
-
+  locator.registerFactory<SearchApiService>(() => SearchApiService());
+  locator.registerFactory<SearchRepo>(() => SearchRepo());
+  locator.registerFactory<HiveSearch>(() => HiveSearch());
   locator.registerFactory<PlaylistRepo>(() => PlaylistRepo());
   locator.registerFactory<AlbumRepo>(() => AlbumRepo());
   locator.registerFactory<ArtistRepo>(() => ArtistRepo());
