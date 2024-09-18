@@ -1,0 +1,11 @@
+class UserIconsSvg {
+  static const String userIcon1 = 'assets/user_icons/usericon 1.svg';
+  static const String userIcon2 = 'assets/user_icons/usericon 2.svg';
+  static const String userIcon3 = 'assets/user_icons/usericon 3.svg';
+  static const String userIcon4 = 'assets/user_icons/usericon 4.svg';
+  static const String userIcon5 = 'assets/user_icons/usericon 5.svg';
+  static const String userIcon6 = 'assets/user_icons/usericon 6.svg';
+  static const String userIcon7 = 'assets/user_icons/usericon 7.svg';
+  static const String userIcon8 = 'assets/user_icons/usericon 8.svg';
+  static const String userIcon9 = 'assets/user_icons/usericon 9.svg';
+}

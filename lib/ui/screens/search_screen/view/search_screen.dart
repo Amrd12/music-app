@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
     showHistory = ValueNotifier<bool>(true);
 
     BlocProvider.of<SearchCubit>(context).loadLocal();
-    
+
     super.initState();
   }
 
@@ -64,8 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
                 return TextField(
                   style: TextStyleManger.mainTextLexend.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
                       wordSpacing: 10),
                   onSubmitted: (value) => _search(),
                   textInputAction: TextInputAction.search,
