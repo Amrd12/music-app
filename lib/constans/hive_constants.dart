@@ -5,4 +5,5 @@ class HiveConstants {
   static const artistBox = "artistBox";
   static const albumBox = "albumBox";
   static const playlistBox = "playlistBox";
+  static const lyricstBox = "lyricstBox";
 }

@@ -133,6 +133,11 @@ class _WelcomScreenState extends State<WelcomScreen> {
       _showSnackBar("Please Enter Valid Name");
       return;
     }
+    if (user.name.length > 10) {
+      goPage(1);
+      _showSnackBar("Name can't be more than 10 characters");
+      return;
+    }
     if (user.pic.toUserIcon() == null) {
       goPage(2);
       _showSnackBar("Please Selext Valid Picture");

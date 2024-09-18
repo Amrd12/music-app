@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_playlist.dart';
 part 'playlist_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -62,7 +64,7 @@ class PlaylistModel extends HiveObject {
       map["playlistAuthor"] = map["author"];
       map.remove("author");
     }
-    return PlaylistModel(
+    return locator.get<HivePlaylist>().getIfSaved(PlaylistModel(
       id: map['id'] as String,
       title: map['title'] as String,
       thumbnail: map['thumbnail'] as String,
@@ -86,7 +88,7 @@ class PlaylistModel extends HiveObject {
       playlistRelease: map['playlistRelease'] != null
           ? map['playlistRelease'] as String
           : null,
-    );
+    ));
   }
 
   String toJson() => json.encode(toMap());

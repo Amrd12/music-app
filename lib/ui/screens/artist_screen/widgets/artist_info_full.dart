@@ -45,7 +45,13 @@ class ArtistInfoFull extends StatelessWidget {
                   style:
                       TextStyleManger.secTextLexendWhite.copyWith(fontSize: 10),
                 ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      model.isInBox == true
+                          ? Icons.favorite
+                          : Icons.heart_broken_outlined,
+                    ))
               ],
             )),
           ],

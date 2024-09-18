@@ -41,7 +41,13 @@ class _AlbumItemFullState extends State<AlbumItemFull> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Top Songs"),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    widget.model.isInBox == true
+                        ? Icons.favorite
+                        : Icons.heart_broken_outlined,
+                  ))
             ],
           ),
         ],

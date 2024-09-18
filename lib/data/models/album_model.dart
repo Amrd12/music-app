@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_album.dart';
 
 part 'album_model.g.dart';
 
@@ -66,29 +68,31 @@ class AlbumModel extends HiveObject {
       map["subtitle"] = map["releaseDate"];
       map.remove("releaseDate");
     }
-    return AlbumModel(
-      id: map['browseId'] as String,
-      title: map['title'] as String,
-      thumbnail: map['thumbnail'] as String,
-      albumDescription: map['subtitle'] as String,
-      albumAuthor:
-          map['albumAuthor'] != null ? map['albumAuthor'] as String : null,
-      albumTotalSong: map['albumTotalSong'] != null
-          ? map['albumTotalSong'] as String
-          : null,
-      albumTotalDuration: map['albumTotalDuration'] != null
-          ? map['albumTotalDuration'] as String
-          : null,
-      musics: map['results'] != null
-          ? List<MusicModel>.from(
-              (map['results'] as List<int>).map<MusicModel?>(
-                (x) => MusicModel.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      albumRelease:
-          map['albumRelease'] != null ? map['albumRelease'] as String : null,
-    );
+
+    return locator.get<HiveAlbum>().getIfSaved(AlbumModel(
+          id: map['browseId'] as String,
+          title: map['title'] as String,
+          thumbnail: map['thumbnail'] as String,
+          albumDescription: map['subtitle'] as String,
+          albumAuthor:
+              map['albumAuthor'] != null ? map['albumAuthor'] as String : null,
+          albumTotalSong: map['albumTotalSong'] != null
+              ? map['albumTotalSong'] as String
+              : null,
+          albumTotalDuration: map['albumTotalDuration'] != null
+              ? map['albumTotalDuration'] as String
+              : null,
+          musics: map['results'] != null
+              ? List<MusicModel>.from(
+                  (map['results'] as List<int>).map<MusicModel?>(
+                    (x) => MusicModel.fromMap(x as Map<String, dynamic>),
+                  ),
+                )
+              : null,
+          albumRelease: map['albumRelease'] != null
+              ? map['albumRelease'] as String
+              : null,
+        ));
   }
 
   String toJson() => json.encode(toMap());

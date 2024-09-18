@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -51,7 +49,6 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    bool isLogin = false;
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -80,8 +77,8 @@ class MainApp extends StatelessWidget {
           title: "music app",
           debugShowCheckedModeBanner: false,
           theme: themedata,
-          home: Scaffold(
-            body: const MianBody(),
+          home: const Scaffold(
+            body: MianBody(),
           ),
         ));
   }
@@ -106,7 +103,7 @@ class _MianBodyState extends State<MianBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is isUserLogin) {
+        if (state is IsUserLogin) {
           isLogin = state.isLogin;
         }
         if (state is CurrentUser) {

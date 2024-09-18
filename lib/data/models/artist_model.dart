@@ -1,6 +1,8 @@
 import 'package:hive/hive.dart';
 import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
+import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_artist.dart';
 part 'artist_model.g.dart';
 
 @HiveType(typeId: 3)
@@ -95,37 +97,37 @@ class ArtistModel extends HiveObject {
       map["channelId"] = map["browseId"];
       map.remove("browseId");
     }
-    return ArtistModel(
-      channelId: map['channelId'] ?? '',
-      title: map['title'] ?? '',
-      thumbnail: map['thumbnail'] ?? '',
-      subscriberText: map['subscriberText'] ?? '',
-      description: map['description'] ?? '',
-      songs: (map['songs'] != null
-          ? List<MusicModel>.from(
-              map['songs'].map((x) => MusicModel.fromMap(x)))
-          : []),
-      albums: (map['albums'] != null
-          ? List<AlbumModel>.from(
-              map['albums'].map((x) => AlbumModel.fromMap(x)))
-          : []),
-      singles: (map['singles'] != null
-          ? List<AlbumModel>.from(
-              map['singles'].map((x) => AlbumModel.fromMap(x)))
-          : []),
-      musics: (map['musics'] != null
-          ? List<MusicModel>.from(
-              map['musics'].map((x) => MusicModel.fromMap(x)))
-          : []),
-      playlist: (map['playlist'] != null
-          ? List<AlbumModel>.from(
-              map['playlist'].map((x) => AlbumModel.fromMap(x)))
-          : []),
-      artist: (map['artist'] != null
-          ? List<ArtistModel>.from(
-              map['artist'].map((x) => ArtistModel.fromMap(x)))
-          : []),
-    );
+    return locator.get<HiveArtist>().getIfSaved(ArtistModel(
+          channelId: map['channelId'] ?? '',
+          title: map['title'] ?? '',
+          thumbnail: map['thumbnail'] ?? '',
+          subscriberText: map['subscriberText'] ?? '',
+          description: map['description'] ?? '',
+          songs: (map['songs'] != null
+              ? List<MusicModel>.from(
+                  map['songs'].map((x) => MusicModel.fromMap(x)))
+              : []),
+          albums: (map['albums'] != null
+              ? List<AlbumModel>.from(
+                  map['albums'].map((x) => AlbumModel.fromMap(x)))
+              : []),
+          singles: (map['singles'] != null
+              ? List<AlbumModel>.from(
+                  map['singles'].map((x) => AlbumModel.fromMap(x)))
+              : []),
+          musics: (map['musics'] != null
+              ? List<MusicModel>.from(
+                  map['musics'].map((x) => MusicModel.fromMap(x)))
+              : []),
+          playlist: (map['playlist'] != null
+              ? List<AlbumModel>.from(
+                  map['playlist'].map((x) => AlbumModel.fromMap(x)))
+              : []),
+          artist: (map['artist'] != null
+              ? List<ArtistModel>.from(
+                  map['artist'].map((x) => ArtistModel.fromMap(x)))
+              : []),
+        ));
   }
   // toJson method
   Map<String, dynamic> toJson() => toMap();

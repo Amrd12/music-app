@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 import 'package:musicapp/data/models/lyric_model.dart';
+import 'package:musicapp/locator.dart';
+import 'package:musicapp/services/database/hive_music.dart';
 
 part 'music_model.g.dart';
 
@@ -66,16 +68,18 @@ class MusicModel extends HiveObject {
     if (map['thumbnail'].runtimeType == String) {
       map['thumbnail'] = [map['thumbnail'].toString()];
     }
-    return MusicModel(
-      id: map['videoId'] as String,
-      title: map['title'] as String,
-      author: map['author'] as String,
-      thumbnail: List<String>.from((map['thumbnail'] as List<String>)),
-      channelId: map['channelId'] != null ? map['channelId'] as String : null,
-      seceunds: map['seceunds'] != null ? map['seceunds'] as double : null,
-      lyrics:
-          map.containsKey("lyrics") ? LyricsModel.fromMap(map["lyrics"]) : null,
-    );
+    return locator.get<HiveMusic>().getIfSaved(MusicModel(
+          id: map['videoId'] as String,
+          title: map['title'] as String,
+          author: map['author'] as String,
+          thumbnail: List<String>.from((map['thumbnail'] as List<String>)),
+          channelId:
+              map['channelId'] != null ? map['channelId'] as String : null,
+          seceunds: map['seceunds'] != null ? map['seceunds'] as double : null,
+          lyrics: map.containsKey("lyrics")
+              ? LyricsModel.fromMap(map["lyrics"])
+              : null,
+        ));
   }
 
   String toJson() => json.encode(toMap());

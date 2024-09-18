@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musicapp/constans/imgs_constance.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/user_model.dart';
 import 'package:musicapp/enums/user_icons.dart';

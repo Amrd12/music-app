@@ -35,7 +35,6 @@ class _UserScreenState extends State<UserScreen> {
         ),
         SizedBox(
           width: width,
-          height: heigt,
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -45,12 +44,20 @@ class _UserScreenState extends State<UserScreen> {
             ],
           ),
         ),
-        CustomBottomSheet(
-            scrollController: _controller,
-            maxSize: .6,
-            minSize: .2,
-            initSize: .5,
-            screen: (context, controller) => const ScrollScreen())
+        Container(
+          alignment: Alignment.bottomCenter,
+          width: width,
+          height: heigt,
+          child: CustomBottomSheet(
+              scrollController: _controller,
+              maxSize: .6,
+              
+              minSize: .2,
+              initSize: .5,
+              screen: (context, controller) => ScrollScreen(
+                    scroll: controller,
+                  )),
+        ),
       ]),
     );
   }

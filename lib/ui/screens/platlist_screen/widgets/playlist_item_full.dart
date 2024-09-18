@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
 import 'package:musicapp/data/models/playlist_model.dart';
+import 'package:musicapp/ui/screens/platlist_screen/cubit/playlist_cubit.dart';
 import 'package:musicapp/ui/screens/platlist_screen/widgets/custom_playlist_photo.dart';
 
 class PlaylistItemFull extends StatefulWidget {
@@ -42,7 +44,14 @@ class _PlaylistItemFullState extends State<PlaylistItemFull> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Top Songs"),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+              IconButton(
+                  onPressed: () =>
+                      BlocProvider.of<PlaylistCubit>(context).add(),
+                  icon: Icon(
+                    widget.model.isInBox == true
+                        ? Icons.favorite
+                        : Icons.heart_broken_outlined,
+                  ))
             ],
           ),
         ],

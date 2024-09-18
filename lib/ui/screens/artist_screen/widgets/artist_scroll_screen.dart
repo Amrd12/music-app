@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:musicapp/constans/colors.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
@@ -29,6 +28,12 @@ class _ArtistScrollScreenState extends State<ArtistScrollScreen> {
     itemScrollController = ItemScrollController();
     _controller = PageController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   List<String> items = [

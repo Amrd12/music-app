@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:musicapp/data/models/album_model.dart';
 import 'package:musicapp/data/models/artist_model.dart';
 import 'package:musicapp/data/models/music_model.dart';
@@ -33,7 +34,7 @@ class UserCubit extends Cubit<UserState> {
 
   void getLogin() {
     log(_isLogin.toString());
-    emit(isUserLogin(_isLogin));
+    emit(IsUserLogin(_isLogin));
     if (_isLogin) {
       emit(CurrentUser(user: _user.userModel));
     }
@@ -43,7 +44,7 @@ class UserCubit extends Cubit<UserState> {
 
   void setUser() {
     _user.setUser(user.user!);
-    emit(isUserLogin(_isLogin));
+    emit(IsUserLogin(_isLogin));
   }
 
   void delUser() async {
@@ -67,9 +68,12 @@ class UserCubit extends Cubit<UserState> {
     emit(user = user.copyWith(user: userModel));
   }
 
+
+
   void getdata() => emit(GetUserData(
       musicList: _music.getAllSaved(),
       albumList: _album.getAllSaved(),
       artistList: _artist.getAllSaved(),
       playlistList: _playlist.getAllSaved()));
+
 }

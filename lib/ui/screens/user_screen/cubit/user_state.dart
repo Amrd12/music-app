@@ -4,9 +4,9 @@ sealed class UserState {}
 
 final class UserInitial extends UserState {}
 
-final class isUserLogin extends UserState {
+final class IsUserLogin extends UserState {
   final bool isLogin;
-  isUserLogin(this.isLogin);
+  IsUserLogin(this.isLogin);
 }
 
 final class CurrentUser extends UserState {

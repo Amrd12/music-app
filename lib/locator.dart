@@ -14,6 +14,7 @@ import 'package:musicapp/data/repo/search_repo.dart';
 import 'package:musicapp/services/Controllers/audio_player_handler.dart';
 import 'package:musicapp/services/database/hive_album.dart';
 import 'package:musicapp/services/database/hive_artist.dart';
+import 'package:musicapp/services/database/hive_lyrics.dart';
 import 'package:musicapp/services/database/hive_music.dart';
 import 'package:musicapp/services/database/hive_playlist.dart';
 import 'package:musicapp/services/database/hive_search.dart';
@@ -43,6 +44,7 @@ void setup() {
   locator.registerFactory<HiveSearch>(() => HiveSearch());
   locator.registerFactory<HiveArtist>(() => HiveArtist());
   locator.registerFactory<HiveAlbum>(() => HiveAlbum());
+  locator.registerFactory<HiveLyrics>(() => HiveLyrics());
   locator.registerFactory<HivePlaylist>(() => HivePlaylist());
   locator.registerLazySingleton<HiveUser>(() => HiveUser());
 

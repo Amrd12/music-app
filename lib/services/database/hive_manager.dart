@@ -16,7 +16,7 @@ abstract class HiveManager<T> {
 
   Box<T> get box => Hive.box<T>(boxName);
 
-  T? getIfSaved(T m) {
+  T getIfSaved(T m) {
     return box.values.firstWhere(
         (test) => (test as dynamic)?.id == (m as dynamic)?.id,
         orElse: () => m);
@@ -27,6 +27,17 @@ abstract class HiveManager<T> {
   }
 
   List<T> getAllSaved() => box.values.toList();
+
+  Future<bool> addOrRemove(HiveObject m) async {
+    if (m.isInBox) {
+      await m.delete();
+      return false;
+    } else {
+      await box.add(m as T);
+      await m.save();
+      return true;
+    }
+  }
 }
 
 Future<void> setupHive() async {

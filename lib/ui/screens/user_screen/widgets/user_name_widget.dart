@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/constans/text_style_manager.dart';
@@ -33,7 +32,7 @@ class _UserNameWidgetState extends State<UserNameWidget> {
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Container(
-        alignment: Alignment(0, -.4),
+        alignment: const Alignment(0, -.4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
